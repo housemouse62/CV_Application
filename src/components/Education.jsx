@@ -1,41 +1,33 @@
 import CustomInput from "./customInput";
-let buttonName = "Submit Changes";
 function Education({
-  education,
   draftEducationData,
   setDraftEducationData,
   setCVData,
   editingEducationID,
   setEditingEducationID,
+  initialEducationState,
 }) {
-  console.log("Education props:", education);
-  console.log(editingEducationID);
+  const isEditing = editingEducationID !== null;
 
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setDraftEducationData((prev) => ({ ...prev, [name]: value }));
+  }
   return (
-    <div>
+    <form>
       <CustomInput
         label="Degree "
         type="text"
         name="degreeName"
         value={draftEducationData.degreeName}
-        onChange={(e) =>
-          setDraftEducationData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="School Name "
         type="text"
         name="schoolName"
         value={draftEducationData.schoolName}
-        onChange={(e) =>
-          setDraftEducationData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="City "
@@ -43,12 +35,7 @@ function Education({
         name="cityName"
         id="cityName"
         value={draftEducationData.cityName}
-        onChange={(e) =>
-          setDraftEducationData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="State/Province "
@@ -56,12 +43,7 @@ function Education({
         name="stateName"
         id="stateName"
         value={draftEducationData.stateName}
-        onChange={(e) =>
-          setDraftEducationData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="Country "
@@ -69,30 +51,21 @@ function Education({
         name="countryName"
         id="countryName"
         value={draftEducationData.countryName}
-        onChange={(e) =>
-          setDraftEducationData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <button
         onClick={() => {
-          if (editingEducationID) {
+          if (isEditing) {
             setCVData((prev) => ({
               ...prev,
               education: prev.education.map((edu) =>
-                edu.id === editingEducationID ? draftEducationData : edu,
+                edu.id === editingEducationID
+                  ? { ...draftEducationData, id: editingEducationID }
+                  : edu,
               ),
             }));
             setEditingEducationID(null);
-            setDraftEducationData({
-              schoolName: "",
-              cityName: "",
-              stateName: "",
-              countryName: "",
-              degreeName: "",
-            });
+            setDraftEducationData(...initialEducationState);
           } else {
             setCVData((prev) => ({
               ...prev,
@@ -102,19 +75,14 @@ function Education({
               ],
             }));
 
-            setDraftEducationData({
-              schoolName: "",
-              cityName: "",
-              stateName: "",
-              countryName: "",
-              degreeName: "",
-            });
+            setDraftEducationData(...initialEducationState);
           }
         }}
       >
-        {editingEducationID ? "Save" : "Add"}
+        {isEditing ? "Save" : "Add"}
+        <span className="visually-hidden">education entry</span>
       </button>
-    </div>
+    </form>
   );
 }
 

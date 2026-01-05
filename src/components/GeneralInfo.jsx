@@ -1,24 +1,24 @@
 import CustomInput from "./customInput";
+import "../styles/GeneralInfo.css";
 
 function GeneralInfo({
   draftGeneralInfoData,
   setDraftGeneralInfoData,
   setCVData,
 }) {
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setDraftGeneralInfoData((prev) => ({ ...prev, [name]: value }));
+  }
   return (
-    <div>
+    <form>
       <CustomInput
         label="First Name "
         type="text"
         name="userFirstName"
         id="userFirstName"
         value={draftGeneralInfoData.userFirstName}
-        onChange={(e) =>
-          setDraftGeneralInfoData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="Last Name "
@@ -26,12 +26,7 @@ function GeneralInfo({
         name="userLastName"
         id="userLastName"
         value={draftGeneralInfoData.userLastName}
-        onChange={(e) =>
-          setDraftGeneralInfoData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="E-mail "
@@ -39,12 +34,7 @@ function GeneralInfo({
         name="userEmail"
         id="userEmail"
         value={draftGeneralInfoData.userEmail}
-        onChange={(e) =>
-          setDraftGeneralInfoData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="Phone Number "
@@ -52,12 +42,7 @@ function GeneralInfo({
         name="userPhone"
         id="userPhone"
         value={draftGeneralInfoData.userPhone}
-        onChange={(e) =>
-          setDraftGeneralInfoData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <CustomInput
         label="Address "
@@ -65,12 +50,7 @@ function GeneralInfo({
         name="userAddress"
         id="userAddress"
         value={draftGeneralInfoData.userAddress}
-        onChange={(e) =>
-          setDraftGeneralInfoData((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-          }))
-        }
+        onChange={handleChange}
       />
       <button
         onClick={() => {
@@ -80,9 +60,9 @@ function GeneralInfo({
           }));
         }}
       >
-        Add
+        Add <span className="visually-hidden">general info entries</span>
       </button>
-    </div>
+    </form>
   );
 }
 

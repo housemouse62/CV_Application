@@ -6,6 +6,9 @@ function MainContainer({
   education,
   editEducation,
   deleteEducation,
+  work,
+  editWorkPlace,
+  deleteWorkPlace,
 }) {
   return (
     <div>
@@ -38,6 +41,33 @@ function MainContainer({
             <li>{school.stateName}</li>
             <li>{school.countryName}</li>
             <li>{school.degreeName}</li>
+          </ul>
+        </div>
+      ))}
+      {work.map((work) => (
+        <div key={work.id}>
+          <h2 className="workPlace">{work.workPlaceName}</h2>
+          <button
+            className="editWorkPlace"
+            onClick={() => editWorkPlace(work.id)}
+          >
+            Edit
+          </button>
+          <button
+            className="editWorkPlace"
+            onClick={() => deleteWorkPlace(work.id)}
+          >
+            Delete
+          </button>
+          <ul>
+            <li>{work.positionTitle}</li>
+            <li>{work.workPlaceName}</li>
+            <li>{work.address}</li>
+            <li>{work.city}</li>
+            <li>{work.state}</li>
+            <li>{work.zipCode}</li>
+            <li>{work.country}</li>
+            <li>{work.duties}</li>
           </ul>
         </div>
       ))}
