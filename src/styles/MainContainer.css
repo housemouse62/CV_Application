@@ -1,15 +1,80 @@
-.MainContainer {
-  height: 100%;
+.resume {
+  display: flex;
+  min-width: 900px;
+  padding: 3rem;
+  background: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  gap: 0.2rem;
+}
+
+.resume p {
+  margin: 0;
+}
+header {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.resume-section {
+  margin-top: 2rem;
+}
 .schoolName,
-.editSchool {
+.editSchool,
+.editWorkPlace,
+.workPlace,
+.editTechnicalSkills,
+.technicalSkills {
   display: inline;
 }
 
-.editSchool {
+.editSchool,
+.editWorkPlace,
+.editTechnicalSkills {
   margin-left: 20px;
+}
+
+.workPlaceHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.buttonSide {
+  display: flex;
+}
+button:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  border-bottom: solid 1px black;
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 10px 10px 0 0;
+  padding: 3px 0 0 5px;
+}
+
+.resume-meta {
+  font-family: "Georgia", "Times New Roman", serif;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.resume-meta .location {
+  font-style: italic;
+}
+
+.year {
+  font-size: 0.85rem;
+  color: #666;
 }

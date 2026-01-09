@@ -9,69 +9,168 @@ function MainContainer({
   work,
   editWorkPlace,
   deleteWorkPlace,
+  technicalSkills,
+  editTechnicalSkills,
+  deleteTechnicalSkills,
 }) {
+  const contactItems = [
+    generalInfo.userEmail && (
+      <a key="email" href={`mailto:${generalInfo.userEmail}`}>
+        {generalInfo.userEmail}
+      </a>
+    ),
+    generalInfo.userPhone && (
+      <a key="phone" href={`tel:${generalInfo.userPhone}`}>
+        {generalInfo.userPhone}
+      </a>
+    ),
+    generalInfo.userLinkedIn && (
+      <a key="linkedIn" href={`${generalInfo.userLinkedIn}`}>
+        LinkedIn
+      </a>
+    ),
+    generalInfo.userGitHub && (
+      <a key="portfolio" href={`${generalInfo.userGitHub}`}>
+        Portfolio
+      </a>
+    ),
+  ].filter(Boolean);
+
   return (
-    <div>
-      <h1>
-        {generalInfo.userFirstName} {generalInfo.userLastName}
-      </h1>
-      {generalInfo.userEmail}
-      <br />
-      {generalInfo.userPhone}
-      <br />
-      {generalInfo.userAddress}
-      <br />
-      {education.map((school) => (
-        <div key={school.id}>
-          <h2 className="schoolName">{school.schoolName}</h2>
-          <button
-            className="editSchool"
-            onClick={() => editEducation(school.id)}
-          >
-            Edit
-          </button>
-          <button
-            className="editSchool"
-            onClick={() => deleteEducation(school.id)}
-          >
-            Delete
-          </button>
-          <ul>
-            <li>{school.cityName}</li>
-            <li>{school.stateName}</li>
-            <li>{school.countryName}</li>
-            <li>{school.degreeName}</li>
-          </ul>
-        </div>
-      ))}
-      {work.map((work) => (
-        <div key={work.id}>
-          <h2 className="workPlace">{work.workPlaceName}</h2>
-          <button
-            className="editWorkPlace"
-            onClick={() => editWorkPlace(work.id)}
-          >
-            Edit
-          </button>
-          <button
-            className="editWorkPlace"
-            onClick={() => deleteWorkPlace(work.id)}
-          >
-            Delete
-          </button>
-          <ul>
-            <li>{work.positionTitle}</li>
-            <li>{work.workPlaceName}</li>
-            <li>{work.address}</li>
-            <li>{work.city}</li>
-            <li>{work.state}</li>
-            <li>{work.zipCode}</li>
-            <li>{work.country}</li>
-            <li>{work.duties}</li>
-          </ul>
-        </div>
-      ))}
-    </div>
+    <main className="resume">
+      <aside className="header-skills">
+        <header className="resume-header">
+          <img className="headShot" alt="applicant's headshot" src="" />
+          <h1>
+            {generalInfo.userFirstName} {generalInfo.userLastName}
+          </h1>
+          <address>
+            {contactItems.map((item, index) => (
+              <span key={index}>
+                {item}
+                {index < contactItems.length - 1 && " | "}
+              </span>
+            ))}
+          </address>
+        </header>
+        <section
+          aria-labelledby="technicalSkills-heading"
+          className="resume-section"
+        >
+          <h2 id="technicalSkills-heading ">Technical Skills</h2>
+          <div className="entries">
+            {technicalSkills.map((skill) => (
+              <article key={skill.id}>
+                <h3 className="technicalSkills">{skill.skillCategory}</h3>
+                <button
+                  className="editTechnicalSkills"
+                  onClick={() => editTechnicalSkills(skill.id)}
+                  aria-label={`Edit ${skill.skillCategory}`}
+                >
+                  Edit
+                </button>
+                <button
+                  className="editTechnicalSkills"
+                  onClick={() => deleteTechnicalSkills(skill.id)}
+                  aria-label={`Delete ${skill.skillCategory}`}
+                >
+                  Delete
+                </button>
+                <br />
+                <ul>
+                  {skill.skills.map((skill, index) => (
+                    <li key={index}>{skill}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      </aside>
+      <div className="experience-education">
+        <section aria-labelledby="workPlace-heading" className="resume-section">
+          <h2 id="workPlace-heading">Work History</h2>
+          <div className="entries">
+            {work.map((work) => (
+              <article key={work.id}>
+                <div className="workPlaceHeader">
+                  <div className="buttonSide">
+                    <div>
+                      <h3 className="workPlace">{work.positionTitle}</h3>
+                      <p>{work.workPlaceName}</p>
+                    </div>
+                    <div>
+                      <button
+                        className="editWorkPlace"
+                        onClick={() => editWorkPlace(work.id)}
+                        aria-label={`Edit ${work.workPlaceName}`}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="editWorkPlace"
+                        onClick={() => deleteWorkPlace(work.id)}
+                        aria-label={`Delete ${work.workPlaceName}`}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <time className="year" dateTime="2022-01">
+                      {work.dates}
+                    </time>
+                    <address>
+                      {[work.city, work.state, work.country]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </address>
+                  </div>
+                </div>
+                <ul>
+                  {work.duties.map((duty, index) => (
+                    <li key={index}>{duty}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section aria-labelledby="education-heading" className="resume-section">
+          <h2 id="education-heading">Education</h2>
+          <div className="entries">
+            {education.map((school) => (
+              <article key={school.id}>
+                <h3 className="schoolName">{school.schoolName}</h3>
+                <button
+                  className="editSchool"
+                  onClick={() => editEducation(school.id)}
+                  aria-label={`Edit ${school.schoolName}`}
+                >
+                  Edit
+                </button>
+                <button
+                  className="editSchool"
+                  onClick={() => deleteEducation(school.id)}
+                  aria-label={`Delete ${school.schoolName}`}
+                >
+                  Delete
+                </button>
+                <div className="resume-meta">
+                  <p className="label">{school.degreeName}</p>
+                  <p className="location">
+                    {[school.cityName, school.stateName, school.countryName]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </p>
+                  <time className="year">{school.year}</time>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
 

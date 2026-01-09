@@ -2,13 +2,15 @@ import { useState } from "react";
 import "../styles/App.css";
 import Sidebar from "./Sidebar";
 import MainContainer from "./MainContainer";
+import { demoCV } from "./templates";
 
 const initialGeneralInfoState = {
   userFirstName: "",
   userLastName: "",
   userEmail: "",
   userPhone: "",
-  userAddress: "",
+  linkedIn: "",
+  Portfolio: "",
 };
 
 const initialEducationState = {
@@ -17,18 +19,22 @@ const initialEducationState = {
   stateName: "",
   countryName: "",
   degreeName: "",
+  year: "",
 };
 
 const initialWorkHistoryState = {
   positionTitle: "",
   workPlaceName: "",
+  dates: "",
   address: "",
   city: "",
   state: "",
   zipCode: "",
   country: "",
-  duties: "",
+  duties: ["", "", ""],
 };
+
+const initialTechnicalSkillsState = { skillCategory: "", skills: ["", "", ""] };
 
 function App() {
   const [activeSection, setActiveSection] = useState("generalInfo");
@@ -43,20 +49,12 @@ function App() {
     initialWorkHistoryState,
   );
   const [editingWorkHistoryID, setEditingWorkHistoryID] = useState(null);
-  const [draftPortfolio, setDraftPortfolio] = useState([{}]);
+  const [draftTechnicalSkills, setDraftTechnicalSkills] = useState(
+    initialTechnicalSkillsState,
+  );
+  const [editingTechnicalID, setEditingTechnicalID] = useState(null);
 
-  const [cvData, setCVData] = useState({
-    generalInfo: {
-      userFirstName: "",
-      userLastName: "",
-      userEmail: "",
-      userPhone: "",
-      userAddress: "",
-    },
-    education: [],
-    workHistory: [],
-    portfolio: [],
-  });
+  const [cvData, setCVData] = useState(demoCV);
 
   function editEducation(id) {
     const schoolToEdit = cvData.education.find((s) => s.id === id);
@@ -68,7 +66,7 @@ function App() {
 
   function deleteEducation(id) {
     if (editingEducationID === id) {
-      setDraftEducationData(...initialEducationState);
+      setDraftEducationData(initialEducationState);
       setEditingEducationID(null);
     }
     const schools = cvData.education.filter((edu) => edu.id !== id);
@@ -85,12 +83,31 @@ function App() {
 
   function deleteWorkPlace(id) {
     if (editingWorkHistoryID === id) {
-      setDraftWorkHistory(...initialWorkHistoryState);
+      setDraftWorkHistory(initialWorkHistoryState);
       setEditingWorkHistoryID(null);
     }
     const workPlaces = cvData.workHistory.filter((work) => work.id !== id);
 
     setCVData((prev) => ({ ...prev, workHistory: workPlaces }));
+  }
+
+  function editTechnicalSkills(id) {
+    const skillToEdit = cvData.technicalSkills.find((s) => s.id === id);
+    setDraftTechnicalSkills(skillToEdit);
+    setEditingTechnicalID(id);
+    setActiveSection("technicalSkills");
+  }
+
+  function deleteTechnicalSkills(id) {
+    if (editingTechnicalID === id) {
+      setDraftTechnicalSkills(initialTechnicalSkillsState);
+      setEditingTechnicalID(null);
+    }
+    const technicalSkills = cvData.technicalSkills.filter(
+      (skill) => skill.id !== id,
+    );
+
+    setCVData((prev) => ({ ...prev, technicalSkills: technicalSkills }));
   }
 
   return (
@@ -109,9 +126,14 @@ function App() {
         setDraftWorkHistory={setDraftWorkHistory}
         editingWorkHistoryID={editingWorkHistoryID}
         setEditingWorkHistoryID={setEditingWorkHistoryID}
+        draftTechnicalSkills={draftTechnicalSkills}
+        setDraftTechnicalSkills={setDraftTechnicalSkills}
+        editingTechnicalID={editingTechnicalID}
+        setEditingTechnicalID={setEditingTechnicalID}
         initialEducationState={initialEducationState}
         initialGeneralInfoState={initialGeneralInfoState}
         initialWorkHistoryState={initialWorkHistoryState}
+        initialTechnicalSkillsState={initialTechnicalSkillsState}
       />
       <MainContainer
         generalInfo={cvData.generalInfo}
@@ -123,6 +145,10 @@ function App() {
         setDraftWorkHistory={setDraftWorkHistory}
         editWorkPlace={editWorkPlace}
         deleteWorkPlace={deleteWorkPlace}
+        technicalSkills={cvData.technicalSkills}
+        setDraftTechnicalSkills={setDraftTechnicalSkills}
+        editTechnicalSkills={editTechnicalSkills}
+        deleteTechnicalSkills={deleteTechnicalSkills}
       />
     </div>
   );

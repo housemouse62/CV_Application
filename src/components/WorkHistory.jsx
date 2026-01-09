@@ -31,10 +31,10 @@ function WorkHistory({
         onChange={handleChange}
       />
       <CustomInput
-        label="Address "
+        label="Dates Worked "
         type="text"
-        name="address"
-        value={draftWorkHistory.address}
+        name="dates"
+        value={draftWorkHistory.dates}
         onChange={handleChange}
       />
       <CustomInput
@@ -65,40 +65,74 @@ function WorkHistory({
         value={draftWorkHistory.country}
         onChange={handleChange}
       />
-      <CustomInput
-        label="Workplace Duties "
-        type="text"
-        name="duties"
-        value={draftWorkHistory.duties}
-        onChange={handleChange}
-      />
+      <div class="duties">
+        <label for="Experience">Experience</label>
+        {draftWorkHistory.duties.map((duty, index) => (
+          <input
+            key={index}
+            label="Experience "
+            type="text"
+            value={duty}
+            className="duty"
+            onChange={(e) => {
+              const updated = [...draftWorkHistory.duties];
+              updated[index] = e.target.value;
+              setDraftWorkHistory((prev) => ({ ...prev, duties: updated }));
+            }}
+          />
+        ))}
+      </div>
       <button
+        type="button"
+        onClick={() =>
+          setDraftWorkHistory((prev) => ({
+            ...prev,
+            duties: [...prev.duties, ""],
+          }))
+        }
+      >
+        Add duty
+      </button>
+      <button
+        type="button"
         onClick={() => {
+          const cleanedDuties = draftWorkHistory.duties
+            .map((duty) => duty.trim())
+            .filter(Boolean);
+
           if (isEditing) {
             setCVData((prev) => ({
               ...prev,
               workHistory: prev.workHistory.map((work) =>
                 work.id === editingWorkHistoryID
-                  ? { ...draftWorkHistory, id: editingWorkHistoryID }
+                  ? {
+                      ...draftWorkHistory,
+                      duties: cleanedDuties,
+                      id: editingWorkHistoryID,
+                    }
                   : work,
               ),
             }));
             setEditingWorkHistoryID(null);
-            setDraftWorkHistory(...initialWorkHistoryState);
+            setDraftWorkHistory(initialWorkHistoryState);
           } else {
             setCVData((prev) => ({
               ...prev,
               workHistory: [
                 ...prev.workHistory,
-                { ...draftWorkHistory, id: crypto.randomUUID() },
+                {
+                  ...draftWorkHistory,
+                  duties: cleanedDuties,
+                  id: crypto.randomUUID(),
+                },
               ],
             }));
             setEditingWorkHistoryID(null);
-            setDraftWorkHistory(...initialWorkHistoryState);
+            setDraftWorkHistory(initialWorkHistoryState);
           }
         }}
       >
-        {isEditing ? "Save" : "Add"}{" "}
+        {isEditing ? "Save" : "Add to Resume"}{" "}
         <span className="visually-hidden">work history entry</span>
       </button>
     </form>

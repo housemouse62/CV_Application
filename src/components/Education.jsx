@@ -53,7 +53,16 @@ function Education({
         value={draftEducationData.countryName}
         onChange={handleChange}
       />
+      <CustomInput
+        label="Years Attended "
+        type="text"
+        name="year"
+        id="year"
+        value={draftEducationData.year}
+        onChange={handleChange}
+      />
       <button
+        type="button"
         onClick={() => {
           if (isEditing) {
             setCVData((prev) => ({
@@ -65,7 +74,7 @@ function Education({
               ),
             }));
             setEditingEducationID(null);
-            setDraftEducationData(...initialEducationState);
+            setDraftEducationData(initialEducationState);
           } else {
             setCVData((prev) => ({
               ...prev,
@@ -75,11 +84,11 @@ function Education({
               ],
             }));
 
-            setDraftEducationData(...initialEducationState);
+            setDraftEducationData(initialEducationState);
           }
         }}
       >
-        {isEditing ? "Save" : "Add"}
+        {isEditing ? "Save" : "Add to Resume"}
         <span className="visually-hidden">education entry</span>
       </button>
     </form>

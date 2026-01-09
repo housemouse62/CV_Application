@@ -1,0 +1,26 @@
+.section-field {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-bottom: 5px;
+}
+
+input {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px 10px 5px 5px;
+}
+
+label {
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+input:focus {
+  border-color: #3b83f6;
+  box-shadow: 0 3px 15px rgba(59, 131, 246, 0.2);
+  outline: none;
+}

@@ -1,5 +1,6 @@
 import CustomInput from "./customInput";
 import "../styles/GeneralInfo.css";
+import "../styles/custom-input.css";
 
 function GeneralInfo({
   draftGeneralInfoData,
@@ -45,14 +46,23 @@ function GeneralInfo({
         onChange={handleChange}
       />
       <CustomInput
-        label="Address "
+        label="LinkedIn "
         type="tel"
-        name="userAddress"
-        id="userAddress"
-        value={draftGeneralInfoData.userAddress}
+        name="userLinkedIn"
+        id="userLinkedIn"
+        value={draftGeneralInfoData.userLinkedIn}
+        onChange={handleChange}
+      />
+      <CustomInput
+        label="GitHub "
+        type="tel"
+        name="userGitHub"
+        id="userGitHub"
+        value={draftGeneralInfoData.userGitHub}
         onChange={handleChange}
       />
       <button
+        type="button"
         onClick={() => {
           setCVData((prev) => ({
             ...prev,
@@ -60,7 +70,8 @@ function GeneralInfo({
           }));
         }}
       >
-        Add <span className="visually-hidden">general info entries</span>
+        Save to Resume
+        <span className="visually-hidden">general info entries</span>
       </button>
     </form>
   );
