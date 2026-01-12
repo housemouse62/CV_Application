@@ -5,6 +5,8 @@ import "../styles/custom-input.css";
 function GeneralInfo({
   draftGeneralInfoData,
   setDraftGeneralInfoData,
+  draftLinks,
+  setDraftLinks,
   setCVData,
 }) {
   function handleChange(e) {
@@ -61,28 +63,32 @@ function GeneralInfo({
         value={draftGeneralInfoData.userGitHub}
         onChange={handleChange}
       />
+      <div>
+        {draftLinks.map((l) => (
+          // {
+          //   console.log(l);
+          // }
+          <input
+            type="text"
+            name={l.linkName}
+            id={l.linkName}
+            value={l.linkAddress}
+          />
+        ))}
+      </div>
+
       <button
         className="addLink"
         type="button"
-        onClick={
-          () =>
-            setCustomLinks((prev) => ({
-              ...prev,
-              customLinks: [
-                ...prev.customLinks,
-                { linkName: "", linkAddress: "" },
-              ],
-            }))
-          // setDraftLinks((prev) => ({
-          //   ...prev,
-          //   customLink: prev.customLink.map((link) =>
-          //     link.id === editingLinkID
-          //       ? { ...draftCustomLinks, linkName: "", linkAddress: "" }
-          //       : link,
-          //   ),
-          // }))
-        }
+        onClick={() => {
+          setDraftLinks((prev) => [
+            ...prev,
+            { id: crypto.randomUUID(), linkName: "", linkAddress: "" },
+          ]);
+          console.log(draftLinks);
+        }}
       >
+        {" "}
         Add Link
       </button>
       <button

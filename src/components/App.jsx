@@ -13,8 +13,8 @@ const initialGeneralInfoState = {
   userGitHub: "",
 };
 
-const initialCustomLinks = {
-  customLink: [{ linkName: "", linkAddress: "" }],
+const initialLinksState = {
+  links: [{ linkName: "", linkAddress: "" }],
 };
 
 const initialEducationState = {
@@ -54,8 +54,11 @@ const initialTechnicalSkillsState = {
 function App() {
   const [activeSection, setActiveSection] = useState("generalInfo");
   const [draftGeneralInfoData, setDraftGeneralInfoData] = useState(
-    initialGeneralInfoState,
+    demoCV.generalInfo,
   );
+
+  const [draftLinks, setDraftLinks] = useState(demoCV.links);
+
   const [draftEducationData, setDraftEducationData] = useState(
     initialEducationState,
   );
@@ -63,10 +66,12 @@ function App() {
   const [draftWorkHistory, setDraftWorkHistory] = useState(
     initialWorkHistoryState,
   );
+
   const [editingWorkHistoryID, setEditingWorkHistoryID] = useState(null);
   const [draftTechnicalSkills, setDraftTechnicalSkills] = useState(
     initialTechnicalSkillsState,
   );
+
   const [editingTechnicalID, setEditingTechnicalID] = useState(null);
 
   const [cvData, setCVData] = useState(demoCV);
@@ -133,6 +138,8 @@ function App() {
         setActiveSection={setActiveSection}
         draftGeneralInfoData={draftGeneralInfoData}
         setDraftGeneralInfoData={setDraftGeneralInfoData}
+        draftLinks={draftLinks}
+        setDraftLinks={setDraftLinks}
         draftEducationData={draftEducationData}
         setDraftEducationData={setDraftEducationData}
         editingEducationID={editingEducationID}
@@ -149,9 +156,11 @@ function App() {
         initialGeneralInfoState={initialGeneralInfoState}
         initialWorkHistoryState={initialWorkHistoryState}
         initialTechnicalSkillsState={initialTechnicalSkillsState}
+        initialLinksState={initialLinksState}
       />
       <MainContainer
         generalInfo={cvData.generalInfo}
+        links={cvData.links}
         education={cvData.education}
         setDraftEducationData={setDraftEducationData}
         editEducation={editEducation}

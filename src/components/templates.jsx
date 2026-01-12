@@ -6,8 +6,8 @@ const emptyCV = {
     userPhone: "",
     userLinkedIn: "",
     userGitHub: "",
-    customLink: [{ linkName: "", linkAddress: "" }],
   },
+  links: [],
   education: [],
   workHistory: [],
   technicalSkills: [],
@@ -21,8 +21,14 @@ const demoCV = {
     userPhone: "666 53 71 84",
     userLinkedIn: "https://www.linkedin.com/in/ryan-skeels62/",
     userGitHub: "https://github.com/housemouse62",
-    customLink: [{ linkName: "Google", linkAddress: "www.google.com" }],
   },
+  links: [
+    {
+      id: crypto.randomUUID(),
+      linkName: "GitHub",
+      linkAddress: "https://github.com/housemouse62",
+    },
+  ],
   education: [
     {
       id: crypto.randomUUID(),

@@ -12,6 +12,8 @@ function Sidebar({
   setCVData,
   draftGeneralInfoData,
   setDraftGeneralInfoData,
+  draftLinks,
+  setDraftLinks,
   draftEducationData,
   setDraftEducationData,
   editingEducationID,
@@ -32,6 +34,7 @@ function Sidebar({
   function resetDrafts() {
     setDraftEducationData(initialEducationState);
     setDraftGeneralInfoData(initialGeneralInfoState);
+    setDraftLinks(setDraftLinks);
     setDraftWorkHistory(initialWorkHistoryState);
     setDraftTechnicalSkills(initialTechnicalSkillsState);
     setEditingEducationID(null);
@@ -89,6 +92,8 @@ function Sidebar({
             <GeneralInfo
               draftGeneralInfoData={draftGeneralInfoData}
               setDraftGeneralInfoData={setDraftGeneralInfoData}
+              draftLinks={draftLinks}
+              setDraftLinks={setDraftLinks}
               setCVData={setCVData}
               initialGeneralInfoState={initialGeneralInfoState}
             />
