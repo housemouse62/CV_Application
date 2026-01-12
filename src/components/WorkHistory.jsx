@@ -52,37 +52,44 @@ function WorkHistory({
         onChange={handleChange}
       />
       <CustomInput
-        label="Zip Code "
-        type="text"
-        name="zipCode"
-        value={draftWorkHistory.zipCode}
-        onChange={handleChange}
-      />
-      <CustomInput
         label="Country "
         type="text"
         name="country"
         value={draftWorkHistory.country}
         onChange={handleChange}
       />
-      <div class="duties">
-        <label for="Experience">Experience</label>
+      <div className="duties">
+        <label htmlFor="Experience">Experience</label>
         {draftWorkHistory.duties.map((duty, index) => (
-          <input
-            key={index}
-            label="Experience "
-            type="text"
-            value={duty}
-            className="duty"
-            onChange={(e) => {
-              const updated = [...draftWorkHistory.duties];
-              updated[index] = e.target.value;
-              setDraftWorkHistory((prev) => ({ ...prev, duties: updated }));
-            }}
-          />
+          <div className="dutyLine" key={duty.id}>
+            <input
+              label="Experience "
+              type="text"
+              value={duty.value}
+              className="duty"
+              onChange={(e) => {
+                const updated = [...draftWorkHistory.duties];
+                updated[index] = e.target.value;
+                setDraftWorkHistory((prev) => ({ ...prev, duties: updated }));
+              }}
+            />
+            <button
+              type="button"
+              className="deleteDuty"
+              onClick={() => {
+                const newDuties = draftWorkHistory.duties.filter(
+                  (_, i) => i !== index,
+                );
+                setDraftWorkHistory((prev) => ({ ...prev, duties: newDuties }));
+              }}
+            >
+              X
+            </button>
+          </div>
         ))}
       </div>
       <button
+        className="addDuty"
         type="button"
         onClick={() =>
           setDraftWorkHistory((prev) => ({
@@ -97,8 +104,8 @@ function WorkHistory({
         type="button"
         onClick={() => {
           const cleanedDuties = draftWorkHistory.duties
-            .map((duty) => duty.trim())
-            .filter(Boolean);
+            .map((duty) => ({ ...duty, value: duty.value.trim() }))
+            .filter((duty) => duty.value !== "");
 
           if (isEditing) {
             setCVData((prev) => ({

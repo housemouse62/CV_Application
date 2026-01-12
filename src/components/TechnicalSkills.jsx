@@ -23,31 +23,44 @@ function TechnicalSkills({
         value={draftTechnicalSkills.skillCategory}
         onChange={handleChange}
       />
-      <div class="skills">
-        <label for="skills">Skills</label>
+      <div className="skills">
+        <label htmlFor="skills">Skills</label>
         {draftTechnicalSkills.skills.map((skill, index) => (
-          <input
-            key={index}
-            label="Skill "
-            type="text"
-            value={skill}
-            className="skill"
-            onChange={(e) => {
-              const updated = [...draftTechnicalSkills.skills];
-              updated[index] = e.target.value;
-              setDraftTechnicalSkills((prev) => ({ ...prev, skills: updated }));
-            }}
-          />
+          <div key={skill.id} className="skillLine">
+            <input
+              label="Skill "
+              type="text"
+              value={skill.value}
+              className="skill"
+              onChange={(e) => {
+                const updated = [...draftTechnicalSkills.skills];
+                updated[index] = e.target.value;
+                setDraftTechnicalSkills((prev) => ({
+                  ...prev,
+                  skills: updated,
+                }));
+              }}
+            />
+            <button
+              type="button"
+              className="deleteSkill"
+              onClick={() => {
+                const newSkills = draftTechnicalSkills.skills.filter(
+                  (_, i) => i !== index,
+                );
+                setDraftTechnicalSkills((prev) => ({
+                  ...prev,
+                  skills: newSkills,
+                }));
+              }}
+            >
+              X
+            </button>
+          </div>
         ))}
       </div>
-      {/* <CustomInput
-        label="Skill "
-        type="text"
-        name="skill"
-        value={draftTechnicalSkills.skills}
-        onChange={handleChange}
-      /> */}
       <button
+        className="addSkill"
         type="button"
         onClick={() =>
           setDraftTechnicalSkills((prev) => ({

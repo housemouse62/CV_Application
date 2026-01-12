@@ -92,7 +92,7 @@ function MainContainer({
               </div>
               <ul>
                 {work.duties.map((duty, index) => (
-                  <li key={index}>{duty}</li>
+                  <li key={duty.id}>{duty.value}</li>
                 ))}
               </ul>
             </article>
@@ -158,7 +158,7 @@ function MainContainer({
               <br />
               <ul>
                 {skill.skills.map((skill, index) => (
-                  <li key={index}>{skill}</li>
+                  <li key={skill.id}>{skill.value}</li>
                 ))}
               </ul>
             </article>

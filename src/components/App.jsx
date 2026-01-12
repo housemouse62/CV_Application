@@ -9,8 +9,12 @@ const initialGeneralInfoState = {
   userLastName: "",
   userEmail: "",
   userPhone: "",
-  linkedIn: "",
-  Portfolio: "",
+  userLinkedIn: "",
+  userGitHub: "",
+};
+
+const initialCustomLinks = {
+  customLink: [{ linkName: "", linkAddress: "" }],
 };
 
 const initialEducationState = {
@@ -31,10 +35,21 @@ const initialWorkHistoryState = {
   state: "",
   zipCode: "",
   country: "",
-  duties: ["", "", ""],
+  duties: [
+    { id: crypto.randomUUID(), value: "" },
+    { id: crypto.randomUUID(), value: "" },
+    { id: crypto.randomUUID(), value: "" },
+  ],
 };
 
-const initialTechnicalSkillsState = { skillCategory: "", skills: ["", "", ""] };
+const initialTechnicalSkillsState = {
+  skillCategory: "",
+  skills: [
+    { id: crypto.randomUUID(), value: "" },
+    { id: crypto.randomUUID(), value: "" },
+    { id: crypto.randomUUID(), value: "" },
+  ],
+};
 
 function App() {
   const [activeSection, setActiveSection] = useState("generalInfo");

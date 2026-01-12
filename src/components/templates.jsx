@@ -6,6 +6,7 @@ const emptyCV = {
     userPhone: "",
     userLinkedIn: "",
     userGitHub: "",
+    customLink: [{ linkName: "", linkAddress: "" }],
   },
   education: [],
   workHistory: [],
@@ -20,6 +21,7 @@ const demoCV = {
     userPhone: "666 53 71 84",
     userLinkedIn: "https://www.linkedin.com/in/ryan-skeels62/",
     userGitHub: "https://github.com/housemouse62",
+    customLink: [{ linkName: "Google", linkAddress: "www.google.com" }],
   },
   education: [
     {
@@ -78,9 +80,18 @@ const demoCV = {
       state: "Valencia",
       country: "Spain",
       duties: [
-        "Support English language instruction for students K–6",
-        "Collaborate with teachers and school leadership",
-        "Classroom management and lesson planning",
+        {
+          id: crypto.randomUUID(),
+          value: "Support English language instruction for students K–6",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Collaborate with teachers and school leadership",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Classroom management and lesson planning",
+        },
       ],
     },
     {
@@ -93,10 +104,26 @@ const demoCV = {
       state: "",
       country: "",
       duties: [
-        "Created a cohesive icon library aligned with disability-related vocabulary and visual accessibility standards.",
-        "Designed presentation materials in Canva and outlined educational slide decks focused on navigating healthcare systems for individuals with developmental disabilities and their advocates.",
-        "Sourced and organized visuals for timelines showcasing public health and disability rights milestones.",
-        "Wrote alt-text for images to support screen reader compatibility and ensure inclusive access to all materials.",
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Created a cohesive icon library aligned with disability-related vocabulary and visual accessibility standards.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Designed presentation materials in Canva and outlined educational slide decks focused on navigating healthcare systems for individuals with developmental disabilities and their advocates.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Sourced and organized visuals for timelines showcasing public health and disability rights milestones.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Wrote alt-text for images to support screen reader compatibility and ensure inclusive access to all materials.",
+        },
       ],
     },
     {
@@ -108,9 +135,20 @@ const demoCV = {
       state: "",
       country: "",
       duties: [
-        "Deliver personalized 1-on-1 English lessons to learners of all levels in a virtual classroom setting.",
-        "Plan and adapt lessons to meet individual learning goals, focusing on conversation, grammar, vocabulary, and real-world usage.",
-        "Utilize interactive tools and authentic materials",
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Deliver personalized 1-on-1 English lessons to learners of all levels in a virtual classroom setting.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Plan and adapt lessons to meet individual learning goals, focusing on conversation, grammar, vocabulary, and real-world usage.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Utilize interactive tools and authentic materials",
+        },
       ],
     },
     {
@@ -122,10 +160,25 @@ const demoCV = {
       state: "",
       country: "",
       duties: [
-        "Transitioned ownership of Baere Brewing Company, including staff support, systems handover, and process documentation.",
-        "Completed a 120-hour TEFL certification course",
-        "Managed the visa application process and international relocation for family ",
-        "Began immersive Spanish language learning through formal classes",
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Transitioned ownership of Baere Brewing Company, including staff support, systems handover, and process documentation.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Completed a 120-hour TEFL certification course",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Managed the visa application process and international relocation for family ",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Began immersive Spanish language learning through formal classes",
+        },
       ],
     },
     {
@@ -137,13 +190,41 @@ const demoCV = {
       state: "Colorado",
       country: "USA",
       duties: [
-        "Co-founded and operated a successful craft brewery, overseeing both production and retail operations in compliance with local and federal regulations.",
-        "Directed business development from concept to launch, including buildout planning, equipment sourcing, and installation.",
-        "Led product development and brewing operations, creating original recipes and managing all aspects of brewing, packaging, and delivery.",
-        "Managed financial operations, including payroll, accounting, and vendor payments, using best practices for small business bookkeeping.",
-        "Developed and implemented HR policies, hiring procedures, and team management systems to support a collaborative work environment.",
-        "Oversaw marketing strategy, social media, graphic design, and community engagement efforts, including a long-running Non-Profit of the Month program.",
-        "Handled procurement of ingredients and materials, equipment maintenance, and facility upkeep",
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Co-founded and operated a successful craft brewery, overseeing both production and retail operations in compliance with local and federal regulations.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Directed business development from concept to launch, including buildout planning, equipment sourcing, and installation.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Led product development and brewing operations, creating original recipes and managing all aspects of brewing, packaging, and delivery.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Managed financial operations, including payroll, accounting, and vendor payments, using best practices for small business bookkeeping.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Developed and implemented HR policies, hiring procedures, and team management systems to support a collaborative work environment.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Oversaw marketing strategy, social media, graphic design, and community engagement efforts, including a long-running Non-Profit of the Month program.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Handled procurement of ingredients and materials, equipment maintenance, and facility upkeep",
+        },
       ],
     },
     {
@@ -155,11 +236,31 @@ const demoCV = {
       state: "Colorado",
       country: "USA",
       duties: [
-        "Conducted public health inspections for food manufacturing and retail facilities to ensure compliance with health codes.",
-        "Authored inspection reports, summaries, and recommendations to support enforcement and education.",
-        "Developed and delivered training programs for new staff, as well as food facility personnel.",
-        "Responded to foodborne illness reports and public complaints, executing follow-up investigations and enforcing corrective actions.",
-        "Led temporary closures and represented the department in legal proceedings related to public health violations.",
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Conducted public health inspections for food manufacturing and retail facilities to ensure compliance with health codes.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Authored inspection reports, summaries, and recommendations to support enforcement and education.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Developed and delivered training programs for new staff, as well as food facility personnel.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Responded to foodborne illness reports and public complaints, executing follow-up investigations and enforcing corrective actions.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Led temporary closures and represented the department in legal proceedings related to public health violations.",
+        },
       ],
     },
     {
@@ -171,11 +272,31 @@ const demoCV = {
       state: "Colorado",
       country: "USA",
       duties: [
-        "Designed and managed forest restoration and habitat conservation projects across public lands.",
-        "Wrote detailed management plans, ecological assessments, and project reports based on field data.",
-        "Collected, analyzed, and interpreted environmental data to guide resource decisions.",
-        "Trained and supervised seasonal staff; led educational programming on machinery safety and environmental topics.",
-        "Developed training materials and protocols for internal programs and public outreach.",
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Designed and managed forest restoration and habitat conservation projects across public lands.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Wrote detailed management plans, ecological assessments, and project reports based on field data.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Collected, analyzed, and interpreted environmental data to guide resource decisions.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Trained and supervised seasonal staff; led educational programming on machinery safety and environmental topics.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Developed training materials and protocols for internal programs and public outreach.",
+        },
       ],
     },
   ],
@@ -184,27 +305,83 @@ const demoCV = {
       id: crypto.randomUUID(),
       skillCategory: "Business",
       skills: [
-        "Business Development & Strategy",
-        "Operations & Project Management",
-        "Policy & Procedure Development",
-        "Communication",
-        "Team Collaboration",
-        "Training, Education & Staff Development",
-        "Financial & Budget Management",
-        "Regulatory Compliance & Risk Management",
-        "Visual Communication & Graphic Design",
-        "Human Resources & Payroll Administration",
+        {
+          id: crypto.randomUUID(),
+          value: "Business Development & Strategy",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Operations & Project Management",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Policy & Procedure Development",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Communication",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Team Collaboration",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Training, Education & Staff Development",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Financial & Budget Management",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Regulatory Compliance & Risk Management",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Visual Communication & Graphic Design",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Human Resources & Payroll Administration",
+        },
       ],
     },
     {
       id: crypto.randomUUID(),
       skillCategory: "Web Development",
-      skills: ["HTML", "CSS", "JavaScript", "React"],
+      skills: [
+        {
+          id: crypto.randomUUID(),
+          value: "HTML",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "CSS",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "JavaScript",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "React",
+        },
+      ],
     },
     {
       id: crypto.randomUUID(),
       skillCategory: "Languages",
-      skills: ["Native English", "Spanish Level B2"],
+      skills: [
+        {
+          id: crypto.randomUUID(),
+          value: "Native English",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Spanish Level B2",
+        },
+      ],
     },
   ],
 };

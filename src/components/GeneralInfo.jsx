@@ -62,6 +62,30 @@ function GeneralInfo({
         onChange={handleChange}
       />
       <button
+        className="addLink"
+        type="button"
+        onClick={
+          () =>
+            setCustomLinks((prev) => ({
+              ...prev,
+              customLinks: [
+                ...prev.customLinks,
+                { linkName: "", linkAddress: "" },
+              ],
+            }))
+          // setDraftLinks((prev) => ({
+          //   ...prev,
+          //   customLink: prev.customLink.map((link) =>
+          //     link.id === editingLinkID
+          //       ? { ...draftCustomLinks, linkName: "", linkAddress: "" }
+          //       : link,
+          //   ),
+          // }))
+        }
+      >
+        Add Link
+      </button>
+      <button
         type="button"
         onClick={() => {
           setCVData((prev) => ({
