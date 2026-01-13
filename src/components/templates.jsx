@@ -4,8 +4,6 @@ const emptyCV = {
     userLastName: "",
     userEmail: "",
     userPhone: "",
-    userLinkedIn: "",
-    userGitHub: "",
   },
   links: [],
   education: [],
@@ -19,14 +17,17 @@ const demoCV = {
     userLastName: "Skeels",
     userEmail: "ryan.skeels@gmail.com",
     userPhone: "666 53 71 84",
-    userLinkedIn: "https://www.linkedin.com/in/ryan-skeels62/",
-    userGitHub: "https://github.com/housemouse62",
   },
   links: [
     {
       id: crypto.randomUUID(),
       linkName: "GitHub",
       linkAddress: "https://github.com/housemouse62",
+    },
+    {
+      id: crypto.randomUUID,
+      linkName: "LinkedIn",
+      linkAddress: "https://www.linkedin.com/in/ryan-skeels62/",
     },
   ],
   education: [
@@ -79,6 +80,7 @@ const demoCV = {
   workHistory: [
     {
       id: crypto.randomUUID(),
+      ind: 0,
       positionTitle: "English Language Assistant",
       workPlaceName: "CEIP San Clemente",
       dates: "Oct 2024 - Present",
@@ -102,6 +104,7 @@ const demoCV = {
     },
     {
       id: crypto.randomUUID(),
+      ind: 1,
       positionTitle:
         "Freelance Content Designer & Visual Communications Specialist",
       workPlaceName: "Andrea Moore Arts (Projects for Special Olympics)",
@@ -134,6 +137,7 @@ const demoCV = {
     },
     {
       id: crypto.randomUUID(),
+      ind: 2,
       positionTitle: "English Tutor",
       workPlaceName: "Preply & LingoAce | Online",
       dates: " June 2024 - Present",
@@ -159,6 +163,7 @@ const demoCV = {
     },
     {
       id: crypto.randomUUID(),
+      ind: 3,
       positionTitle: "Planned Career Break",
       workPlaceName: "Preply & LingoAce | Online",
       dates: "March 2023 - January 2024 ",
@@ -189,6 +194,7 @@ const demoCV = {
     },
     {
       id: crypto.randomUUID(),
+      ind: 4,
       positionTitle: "Operating Manager  |  Owner  |  Founder",
       workPlaceName: "Baere Brewing Company",
       dates: "2012 - 2023",
@@ -235,6 +241,7 @@ const demoCV = {
     },
     {
       id: crypto.randomUUID(),
+      ind: 5,
       positionTitle: "Environmental Health Investigator II",
       workPlaceName: "City of Denver Public Health & Environment",
       dates: "2012 - 2014",
@@ -271,6 +278,7 @@ const demoCV = {
     },
     {
       id: crypto.randomUUID(),
+      ind: 6,
       positionTitle: "Natural Resource Specialist",
       workPlaceName: "Jefferson County Open Space ",
       dates: "2008 - 2012",

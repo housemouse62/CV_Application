@@ -9,8 +9,6 @@ const initialGeneralInfoState = {
   userLastName: "",
   userEmail: "",
   userPhone: "",
-  userLinkedIn: "",
-  userGitHub: "",
 };
 
 const initialLinksState = {
@@ -133,6 +131,7 @@ function App() {
   return (
     <div className="App">
       <Sidebar
+        cvData={cvData}
         setCVData={setCVData}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
@@ -159,13 +158,16 @@ function App() {
         initialLinksState={initialLinksState}
       />
       <MainContainer
+        cvData={cvData}
         generalInfo={cvData.generalInfo}
+        setCVData={setCVData}
         links={cvData.links}
         education={cvData.education}
         setDraftEducationData={setDraftEducationData}
         editEducation={editEducation}
         deleteEducation={deleteEducation}
         work={cvData.workHistory}
+        draftWorkHistory={draftWorkHistory}
         setDraftWorkHistory={setDraftWorkHistory}
         editWorkPlace={editWorkPlace}
         deleteWorkPlace={deleteWorkPlace}

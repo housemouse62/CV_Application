@@ -18,6 +18,17 @@ header {
 .resume-section {
   margin-top: 2rem;
 }
+
+.workEntry {
+  display: flex;
+}
+
+.arrowDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .schoolName,
 .editSchool,
 .editWorkPlace,

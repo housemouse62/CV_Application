@@ -1,5 +1,4 @@
 import "../styles/Sidebar.css";
-import { useState } from "react";
 import Education from "./Education";
 import GeneralInfo from "./GeneralInfo";
 import WorkHistory from "./WorkHistory";
@@ -9,6 +8,7 @@ import { demoCV, emptyCV } from "./templates";
 function Sidebar({
   activeSection,
   setActiveSection,
+  cvData,
   setCVData,
   draftGeneralInfoData,
   setDraftGeneralInfoData,

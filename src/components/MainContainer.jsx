@@ -2,16 +2,21 @@ import "../styles/MainContainer.css";
 import Education from "./Education";
 
 function MainContainer({
+  cvData,
+  setCVData,
   generalInfo,
   education,
   editEducation,
   deleteEducation,
   work,
+  links,
   editWorkPlace,
   deleteWorkPlace,
   technicalSkills,
   editTechnicalSkills,
   deleteTechnicalSkills,
+  setDraftWorkHistory,
+  draftWorkHistory,
 }) {
   const contactItems = [
     generalInfo.userEmail && (
@@ -24,17 +29,33 @@ function MainContainer({
         {generalInfo.userPhone}
       </a>
     ),
-    generalInfo.userLinkedIn && (
-      <a key="linkedIn" href={`${generalInfo.userLinkedIn}`}>
-        LinkedIn
+    ...(links?.map((l) => (
+      <a key={`${l.linkName}`} href={`${l.linkAddress}`}>
+        {l.linkName}
       </a>
-    ),
-    generalInfo.userGitHub && (
-      <a key="portfolio" href={`${generalInfo.userGitHub}`}>
-        Portfolio
-      </a>
-    ),
+    )) ?? []),
   ].filter(Boolean);
+
+  function moveUpInArray(i) {
+    console.log(i);
+    const tempWorkHistory = cvData.workHistory;
+
+    const index = cvData.workHistory.findIndex((x) => x.id === i);
+
+    const moveItem = tempWorkHistory.splice(index, 1);
+    setDraftWorkHistory(tempWorkHistory.splice(index - 1, 0, moveItem[0]));
+  }
+
+  function moveDownInArray(i) {
+    const tempWorkHistory = [...cvData.workHistory];
+    const index = cvData.workHistory.findIndex((x) => x.id === i);
+    const moveItem = tempWorkHistory.splice(index, 1);
+
+    tempWorkHistory.splice(index + 1, 0, moveItem[0]);
+    console.log(tempWorkHistory);
+    setDraftWorkHistory(tempWorkHistory);
+    setCVData((prev) => ({ ...prev, workHistory: tempWorkHistory }));
+  }
 
   return (
     <main className="resume">
@@ -54,47 +75,65 @@ function MainContainer({
       <section aria-labelledby="workPlace-heading" className="resume-section">
         <h2 id="workPlace-heading">Work History</h2>
         <div className="entries">
-          {work.map((work) => (
-            <article key={work.id}>
-              <div className="workPlaceHeader">
-                <div className="buttonSide">
-                  <div>
-                    <h3 className="workPlace">{work.positionTitle}</h3>
-                    <p>{work.workPlaceName}</p>
-                  </div>
-                  <div>
-                    <button
-                      className="editWorkPlace"
-                      onClick={() => editWorkPlace(work.id)}
-                      aria-label={`Edit ${work.workPlaceName}`}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="editWorkPlace"
-                      onClick={() => deleteWorkPlace(work.id)}
-                      aria-label={`Delete ${work.workPlaceName}`}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <time className="year" dateTime="2022-01">
-                    {work.dates}
-                  </time>
-                  <address>
-                    {[work.city, work.state, work.country]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </address>
-                </div>
+          {work.map((work, index) => (
+            <article key={work.id} className="workEntry">
+              <div className="arrowDiv">
+                <button
+                  type="button"
+                  className="arrowButton"
+                  onClick={() => moveUpInArray(work.id)}
+                >
+                  UP{work.ind}
+                </button>
+                <button
+                  type="button"
+                  className="arrowButton"
+                  onClick={() => moveDownInArray(work.id)}
+                >
+                  DOWN
+                </button>
               </div>
-              <ul>
-                {work.duties.map((duty, index) => (
-                  <li key={duty.id}>{duty.value}</li>
-                ))}
-              </ul>
+              <div className="workPlaceInfo">
+                <div className="workPlaceHeader">
+                  <div className="buttonSide">
+                    <div>
+                      <h3 className="workPlace">{work.positionTitle}</h3>
+                      <p>{work.workPlaceName}</p>
+                    </div>
+                    <div>
+                      <button
+                        className="editWorkPlace"
+                        onClick={() => editWorkPlace(work.id)}
+                        aria-label={`Edit ${work.workPlaceName}`}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="editWorkPlace"
+                        onClick={() => deleteWorkPlace(work.id)}
+                        aria-label={`Delete ${work.workPlaceName}`}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <time className="year" dateTime="2022-01">
+                      {work.dates}
+                    </time>
+                    <address>
+                      {[work.city, work.state, work.country]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </address>
+                  </div>
+                </div>
+                <ul>
+                  {work.duties.map((duty) => (
+                    <li key={duty.id}>{duty.value}</li>
+                  ))}
+                </ul>
+              </div>
             </article>
           ))}
         </div>

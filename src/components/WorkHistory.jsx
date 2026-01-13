@@ -1,5 +1,6 @@
 import CustomInput from "./customInput";
 function WorkHistory({
+  cvData,
   setCVData,
   draftWorkHistory,
   setDraftWorkHistory,
@@ -70,7 +71,10 @@ function WorkHistory({
               onChange={(e) => {
                 const updated = [...draftWorkHistory.duties];
                 updated[index] = e.target.value;
-                setDraftWorkHistory((prev) => ({ ...prev, duties: updated }));
+                setDraftWorkHistory((prev) => ({
+                  ...prev,
+                  duties: updated,
+                }));
               }}
             />
             <button
@@ -123,7 +127,7 @@ function WorkHistory({
             setEditingWorkHistoryID(null);
             setDraftWorkHistory(initialWorkHistoryState);
           } else {
-            setCVData((prev) => ({
+            setCVData((prev, index) => ({
               ...prev,
               workHistory: [
                 ...prev.workHistory,
@@ -136,6 +140,7 @@ function WorkHistory({
             }));
             setEditingWorkHistoryID(null);
             setDraftWorkHistory(initialWorkHistoryState);
+            console.log(cvData);
           }
         }}
       >

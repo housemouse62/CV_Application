@@ -47,33 +47,38 @@ function GeneralInfo({
         value={draftGeneralInfoData.userPhone}
         onChange={handleChange}
       />
-      <CustomInput
-        label="LinkedIn "
-        type="tel"
-        name="userLinkedIn"
-        id="userLinkedIn"
-        value={draftGeneralInfoData.userLinkedIn}
-        onChange={handleChange}
-      />
-      <CustomInput
-        label="GitHub "
-        type="tel"
-        name="userGitHub"
-        id="userGitHub"
-        value={draftGeneralInfoData.userGitHub}
-        onChange={handleChange}
-      />
       <div>
-        {draftLinks.map((l) => (
-          // {
-          //   console.log(l);
-          // }
-          <input
-            type="text"
-            name={l.linkName}
-            id={l.linkName}
-            value={l.linkAddress}
-          />
+        {draftLinks.map((link) => (
+          <div key={link.id} className="linkBox">
+            <input
+              type="text"
+              name={link.linkName}
+              id={link.linkName}
+              value={link.linkName}
+              onChange={(e) => {
+                setDraftLinks((prev) =>
+                  prev.map((l) =>
+                    l.id === link.id ? { ...l, linkName: e.target.value } : l,
+                  ),
+                );
+              }}
+            />
+            <input
+              type="text"
+              name={link.linkAddress}
+              id={link.linkAddress}
+              value={link.linkAddress}
+              onChange={(e) => {
+                setDraftLinks((prev) =>
+                  prev.map((l) =>
+                    l.id === link.id
+                      ? { ...l, linkAddress: e.target.value }
+                      : l,
+                  ),
+                );
+              }}
+            />
+          </div>
         ))}
       </div>
 
@@ -97,6 +102,7 @@ function GeneralInfo({
           setCVData((prev) => ({
             ...prev,
             generalInfo: draftGeneralInfoData,
+            links: draftLinks,
           }));
         }}
       >
