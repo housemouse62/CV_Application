@@ -36,25 +36,25 @@ function MainContainer({
     )) ?? []),
   ].filter(Boolean);
 
-  function moveUpInArray(i) {
-    console.log(i);
-    const tempWorkHistory = cvData.workHistory;
-
-    const index = cvData.workHistory.findIndex((x) => x.id === i);
-
-    const moveItem = tempWorkHistory.splice(index, 1);
-    setDraftWorkHistory(tempWorkHistory.splice(index - 1, 0, moveItem[0]));
-  }
-
   function moveDownInArray(i) {
+    console.log(i);
     const tempWorkHistory = [...cvData.workHistory];
     const index = cvData.workHistory.findIndex((x) => x.id === i);
-    const moveItem = tempWorkHistory.splice(index, 1);
+    if (index > 0) {
+      const moveItem = tempWorkHistory.splice(index, 1);
+      tempWorkHistory.splice(index - 1, 0, moveItem[0]);
+      setCVData((prev) => ({ ...prev, workHistory: tempWorkHistory }));
+    }
+  }
 
-    tempWorkHistory.splice(index + 1, 0, moveItem[0]);
-    console.log(tempWorkHistory);
-    setDraftWorkHistory(tempWorkHistory);
-    setCVData((prev) => ({ ...prev, workHistory: tempWorkHistory }));
+  function moveUpInArray(i) {
+    const tempWorkHistory = [...cvData.workHistory];
+    const index = cvData.workHistory.findIndex((x) => x.id === i);
+    if (index < cvData.workHistory.length - 1) {
+      const moveItem = tempWorkHistory.splice(index, 1);
+      tempWorkHistory.splice(index + 1, 0, moveItem[0]);
+      setCVData((prev) => ({ ...prev, workHistory: tempWorkHistory }));
+    }
   }
 
   return (
@@ -75,20 +75,20 @@ function MainContainer({
       <section aria-labelledby="workPlace-heading" className="resume-section">
         <h2 id="workPlace-heading">Work History</h2>
         <div className="entries">
-          {work.map((work, index) => (
+          {work.map((work) => (
             <article key={work.id} className="workEntry">
               <div className="arrowDiv">
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveUpInArray(work.id)}
+                  onClick={() => moveDownInArray(work.id)}
                 >
-                  UP{work.ind}
+                  UP
                 </button>
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveDownInArray(work.id)}
+                  onClick={() => moveUpInArray(work.id)}
                 >
                   DOWN
                 </button>
