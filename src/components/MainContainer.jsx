@@ -1,5 +1,4 @@
 import "../styles/MainContainer.css";
-import Education from "./Education";
 
 function MainContainer({
   cvData,
@@ -30,7 +29,7 @@ function MainContainer({
       </a>
     ),
     ...(links?.map((l) => (
-      <a key={`${l.linkName}`} href={`${l.linkAddress}`}>
+      <a key={`${l.id}`} href={`${l.linkAddress}`}>
         {l.linkName}
       </a>
     )) ?? []),

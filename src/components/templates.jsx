@@ -25,7 +25,7 @@ const demoCV = {
       linkAddress: "https://github.com/housemouse62",
     },
     {
-      id: crypto.randomUUID,
+      id: crypto.randomUUID(),
       linkName: "LinkedIn",
       linkAddress: "https://www.linkedin.com/in/ryan-skeels62/",
     },

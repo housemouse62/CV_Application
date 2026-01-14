@@ -99,10 +99,19 @@ function GeneralInfo({
       <button
         type="button"
         onClick={() => {
+          const filtered = draftLinks
+            .map((link) => ({
+              ...link,
+              linkName: link.linkName.trim(),
+              linkAddress: link.linkAddress.trim(),
+            }))
+            .filter(
+              (link) => link.linkName.trim() !== "" && link.linkAddress !== "",
+            );
           setCVData((prev) => ({
             ...prev,
             generalInfo: draftGeneralInfoData,
-            links: draftLinks,
+            links: filtered,
           }));
         }}
       >
