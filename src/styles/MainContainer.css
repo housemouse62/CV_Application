@@ -19,7 +19,8 @@ header {
   margin-top: 2rem;
 }
 
-.workEntry {
+.workEntry,
+.eduEntry {
   display: flex;
 }
 

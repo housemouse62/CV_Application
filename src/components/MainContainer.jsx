@@ -36,8 +36,7 @@ function MainContainer({
     )) ?? []),
   ].filter(Boolean);
 
-  function moveDownInArray(i) {
-    console.log(i);
+  function moveWorkDownInArray(i) {
     const tempWorkHistory = [...cvData.workHistory];
     const index = cvData.workHistory.findIndex((x) => x.id === i);
     if (index > 0) {
@@ -47,13 +46,33 @@ function MainContainer({
     }
   }
 
-  function moveUpInArray(i) {
+  function moveWorkUpInArray(i) {
     const tempWorkHistory = [...cvData.workHistory];
     const index = cvData.workHistory.findIndex((x) => x.id === i);
     if (index < cvData.workHistory.length - 1) {
       const moveItem = tempWorkHistory.splice(index, 1);
       tempWorkHistory.splice(index + 1, 0, moveItem[0]);
       setCVData((prev) => ({ ...prev, workHistory: tempWorkHistory }));
+    }
+  }
+
+  function moveEduDownInArray(i) {
+    const tempEduHistory = [...cvData.education];
+    const index = cvData.education.findIndex((x) => x.id === i);
+    if (index > 0) {
+      const moveItem = tempEduHistory.splice(index, 1);
+      tempEduHistory.splice(index - 1, 0, moveItem[0]);
+      setCVData((prev) => ({ ...prev, education: tempEduHistory }));
+    }
+  }
+
+  function moveEduUpInArray(i) {
+    const tempEduHistory = [...cvData.education];
+    const index = cvData.education.findIndex((x) => x.id === i);
+    if (index < cvData.education.length - 1) {
+      const moveItem = tempEduHistory.splice(index, 1);
+      tempEduHistory.splice(index + 1, 0, moveItem[0]);
+      setCVData((prev) => ({ ...prev, education: tempEduHistory }));
     }
   }
 
@@ -81,14 +100,14 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveDownInArray(work.id)}
+                  onClick={() => moveWorkDownInArray(work.id)}
                 >
                   UP
                 </button>
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveUpInArray(work.id)}
+                  onClick={() => moveWorkUpInArray(work.id)}
                 >
                   DOWN
                 </button>
@@ -142,30 +161,49 @@ function MainContainer({
         <h2 id="education-heading">Education</h2>
         <div className="entries">
           {education.map((school) => (
-            <article key={school.id}>
-              <h3 className="schoolName">{school.schoolName}</h3>
-              <button
-                className="editSchool"
-                onClick={() => editEducation(school.id)}
-                aria-label={`Edit ${school.schoolName}`}
-              >
-                Edit
-              </button>
-              <button
-                className="editSchool"
-                onClick={() => deleteEducation(school.id)}
-                aria-label={`Delete ${school.schoolName}`}
-              >
-                Delete
-              </button>
-              <div className="resume-meta">
-                <p className="label">{school.degreeName}</p>
-                <p className="location">
-                  {[school.cityName, school.stateName, school.countryName]
-                    .filter(Boolean)
-                    .join(", ")}
-                </p>
-                <time className="year">{school.year}</time>
+            <article key={school.id} className="eduEntry">
+              <div className="arrowDiv">
+                <button
+                  type="button"
+                  className="arrowButton"
+                  onClick={() => moveEduDownInArray(school.id)}
+                >
+                  UP
+                </button>
+                <button
+                  type="button"
+                  className="arrowButton"
+                  onClick={() => moveEduUpInArray(school.id)}
+                >
+                  DOWN
+                </button>
+              </div>
+
+              <div className="eduPlaceInfo">
+                <h3 className="schoolName">{school.schoolName}</h3>
+                <button
+                  className="editSchool"
+                  onClick={() => editEducation(school.id)}
+                  aria-label={`Edit ${school.schoolName}`}
+                >
+                  Edit
+                </button>
+                <button
+                  className="editSchool"
+                  onClick={() => deleteEducation(school.id)}
+                  aria-label={`Delete ${school.schoolName}`}
+                >
+                  Delete
+                </button>
+                <div className="resume-meta">
+                  <p className="label">{school.degreeName}</p>
+                  <p className="location">
+                    {[school.cityName, school.stateName, school.countryName]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </p>
+                  <time className="year">{school.year}</time>
+                </div>
               </div>
             </article>
           ))}
