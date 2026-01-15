@@ -12,6 +12,7 @@ function Sidebar({
   setCVData,
   draftGeneralInfoData,
   setDraftGeneralInfoData,
+  initialLinksState,
   draftLinks,
   setDraftLinks,
   draftEducationData,
@@ -31,10 +32,14 @@ function Sidebar({
   initialWorkHistoryState,
   initialTechnicalSkillsState,
 }) {
-  function resetDrafts() {
+  function resetDrafts(cv) {
     setDraftEducationData(initialEducationState);
-    setDraftGeneralInfoData(initialGeneralInfoState);
-    setDraftLinks(setDraftLinks);
+    setDraftGeneralInfoData(cv.generalInfo);
+    setDraftLinks(
+      cv.links.length
+        ? cv.links
+        : [{ id: crypto.randomUUID(), linkName: "", linkAddress: "" }],
+    );
     setDraftWorkHistory(initialWorkHistoryState);
     setDraftTechnicalSkills(initialTechnicalSkillsState);
     setEditingEducationID(null);
@@ -42,13 +47,15 @@ function Sidebar({
     setEditingWorkHistoryID(null);
   }
   function loadEmptyCV() {
-    setCVData(structuredClone(emptyCV));
-    resetDrafts();
+    const empty = structuredClone(emptyCV);
+    setCVData(empty);
+    resetDrafts(empty);
   }
 
   function loadDemoCV() {
-    setCVData(structuredClone(demoCV));
-    resetDrafts();
+    const demo = structuredClone(demoCV);
+    setCVData(demo);
+    resetDrafts(demo);
   }
 
   return (

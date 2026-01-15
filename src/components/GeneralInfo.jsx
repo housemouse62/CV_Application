@@ -52,8 +52,7 @@ function GeneralInfo({
           <div key={link.id} className="linkBox">
             <input
               type="text"
-              name={link.linkName}
-              id={link.linkName}
+              id={`link-name-${link.id}`}
               value={link.linkName}
               onChange={(e) => {
                 setDraftLinks((prev) =>
@@ -65,8 +64,7 @@ function GeneralInfo({
             />
             <input
               type="text"
-              name={link.linkAddress}
-              id={link.linkAddress}
+              id={`link-address-${link.id}`}
               value={link.linkAddress}
               onChange={(e) => {
                 setDraftLinks((prev) =>
@@ -78,6 +76,15 @@ function GeneralInfo({
                 );
               }}
             />
+            <button
+              type="button"
+              className="deleteLink"
+              onClick={() => {
+                setDraftLinks((prev) => prev.filter((l) => l.id !== link.id));
+              }}
+            >
+              X
+            </button>
           </div>
         ))}
       </div>

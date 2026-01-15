@@ -12,7 +12,7 @@ const initialGeneralInfoState = {
 };
 
 const initialLinksState = {
-  links: [{ linkName: "", linkAddress: "" }],
+  links: [{ id: crypto.randomUUID(), linkName: "", linkAddress: "" }],
 };
 
 const initialEducationState = {
@@ -136,6 +136,7 @@ function App() {
         activeSection={activeSection}
         setActiveSection={setActiveSection}
         draftGeneralInfoData={draftGeneralInfoData}
+        initialLinksState={initialLinksState}
         setDraftGeneralInfoData={setDraftGeneralInfoData}
         draftLinks={draftLinks}
         setDraftLinks={setDraftLinks}
