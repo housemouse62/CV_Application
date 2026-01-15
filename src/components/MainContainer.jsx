@@ -16,6 +16,7 @@ function MainContainer({
   deleteTechnicalSkills,
   setDraftWorkHistory,
   draftWorkHistory,
+  updateState,
 }) {
   const contactItems = [
     generalInfo.userEmail && (
@@ -35,24 +36,41 @@ function MainContainer({
     )) ?? []),
   ].filter(Boolean);
 
-  function moveWorkDownInArray(i) {
-    const tempWorkHistory = [...cvData.workHistory];
-    const index = cvData.workHistory.findIndex((x) => x.id === i);
-    if (index > 0) {
-      const moveItem = tempWorkHistory.splice(index, 1);
-      tempWorkHistory.splice(index - 1, 0, moveItem[0]);
-      setCVData((prev) => ({ ...prev, workHistory: tempWorkHistory }));
+  function moveWorkDownInArray(cv, workID) {
+    const workHistory = [...cv.workHistory];
+    const index = work.findIndex((x) => x.id === workID);
+    if (index <= 0) {
+      return cv;
     }
+
+    const [item] = workHistory.splice(index, 1);
+    workHistory.splice(index - 1, 0, item);
+    console.log("up arrow");
+    return { ...cv, workHistory };
   }
 
-  function moveWorkUpInArray(i) {
-    const tempWorkHistory = [...cvData.workHistory];
-    const index = cvData.workHistory.findIndex((x) => x.id === i);
-    if (index < cvData.workHistory.length - 1) {
-      const moveItem = tempWorkHistory.splice(index, 1);
-      tempWorkHistory.splice(index + 1, 0, moveItem[0]);
-      setCVData((prev) => ({ ...prev, workHistory: tempWorkHistory }));
+  function handleMoveWorkDownInArray(workID) {
+    const newCV = moveWorkDownInArray(cvData.present, workID);
+    updateState(newCV);
+  }
+
+  function moveWorkUpInArray(cv, workID) {
+    const workHistory = [...cv.workHistory];
+    const index = work.findIndex((w) => w.id === workID);
+
+    if (index === -1 || index === work.length - 1) {
+      return cv;
     }
+
+    const [item] = workHistory.splice(index, 1);
+    workHistory.splice(index + 1, 0, item);
+    console.log("down arrow");
+    return { ...cv, workHistory };
+  }
+
+  function handleMoveWorkUpInArray(workID) {
+    const newCV = moveWorkUpInArray(cvData.present, workID);
+    updateState(newCV);
   }
 
   function moveEduDownInArray(i) {
@@ -99,14 +117,14 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveWorkDownInArray(work.id)}
+                  onClick={() => handleMoveWorkDownInArray(work.id)}
                 >
                   UP
                 </button>
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveWorkUpInArray(work.id)}
+                  onClick={() => handleMoveWorkUpInArray(work.id)}
                 >
                   DOWN
                 </button>

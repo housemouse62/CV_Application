@@ -168,7 +168,6 @@ function App() {
         initialGeneralInfoState={initialGeneralInfoState}
         initialWorkHistoryState={initialWorkHistoryState}
         initialTechnicalSkillsState={initialTechnicalSkillsState}
-        initialLinksState={initialLinksState}
       />
       <MainContainer
         updateState={updateState}
