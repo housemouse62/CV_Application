@@ -48,11 +48,13 @@ function GeneralInfo({
         onChange={handleChange}
       />
       <div>
+        <label htmlFor="links">Links</label>
         {draftLinks.map((link) => (
           <div key={link.id} className="linkBox">
             <input
               type="text"
               id={`link-name-${link.id}`}
+              placeholder="LinkdIn"
               value={link.linkName}
               onChange={(e) => {
                 setDraftLinks((prev) =>
@@ -65,6 +67,7 @@ function GeneralInfo({
             <input
               type="text"
               id={`link-address-${link.id}`}
+              placeholder="www.linkdin.com..."
               value={link.linkAddress}
               onChange={(e) => {
                 setDraftLinks((prev) =>

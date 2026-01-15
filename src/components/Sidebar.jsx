@@ -8,6 +8,7 @@ import { demoCV, emptyCV } from "./templates";
 function Sidebar({
   activeSection,
   setActiveSection,
+  updateState,
   cvData,
   setCVData,
   draftGeneralInfoData,

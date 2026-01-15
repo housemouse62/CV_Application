@@ -72,8 +72,19 @@ function App() {
 
   const [editingTechnicalID, setEditingTechnicalID] = useState(null);
 
-  const [cvData, setCVData] = useState(demoCV);
+  const [cvData, setCVData] = useState({
+    past: [],
+    present: demoCV,
+    future: [],
+  });
 
+  function updateState(newPresent) {
+    setCVData(({ past, present }) => ({
+      past: [...past, present],
+      present: newPresent,
+      future: [],
+    }));
+  }
   function editEducation(id) {
     const schoolToEdit = cvData.education.find((s) => s.id === id);
     console.log(schoolToEdit);
@@ -131,6 +142,7 @@ function App() {
   return (
     <div className="App">
       <Sidebar
+        updateState={updateState}
         cvData={cvData}
         setCVData={setCVData}
         activeSection={activeSection}
@@ -159,20 +171,21 @@ function App() {
         initialLinksState={initialLinksState}
       />
       <MainContainer
+        updateState={updateState}
         cvData={cvData}
-        generalInfo={cvData.generalInfo}
+        generalInfo={cvData.present.generalInfo}
         setCVData={setCVData}
-        links={cvData.links}
-        education={cvData.education}
+        links={cvData.present.links}
+        education={cvData.present.education}
         setDraftEducationData={setDraftEducationData}
         editEducation={editEducation}
         deleteEducation={deleteEducation}
-        work={cvData.workHistory}
+        work={cvData.present.workHistory}
         draftWorkHistory={draftWorkHistory}
         setDraftWorkHistory={setDraftWorkHistory}
         editWorkPlace={editWorkPlace}
         deleteWorkPlace={deleteWorkPlace}
-        technicalSkills={cvData.technicalSkills}
+        technicalSkills={cvData.present.technicalSkills}
         setDraftTechnicalSkills={setDraftTechnicalSkills}
         editTechnicalSkills={editTechnicalSkills}
         deleteTechnicalSkills={deleteTechnicalSkills}

@@ -107,6 +107,9 @@ function WorkHistory({
       <button
         type="button"
         onClick={() => {
+          const hasRequiredFields =
+            draftWorkHistory.workPlaceName.trim() !== "";
+          if (!hasRequiredFields) return;
           const cleanedDuties = draftWorkHistory.duties
             .map((duty) => ({ ...duty, value: duty.value.trim() }))
             .filter((duty) => duty.value !== "");
@@ -127,7 +130,7 @@ function WorkHistory({
             setEditingWorkHistoryID(null);
             setDraftWorkHistory(initialWorkHistoryState);
           } else {
-            setCVData((prev, index) => ({
+            setCVData((prev) => ({
               ...prev,
               workHistory: [
                 ...prev.workHistory,

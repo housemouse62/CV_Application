@@ -91,7 +91,7 @@ function MainContainer({
         </address>
       </header>
       <section aria-labelledby="workPlace-heading" className="resume-section">
-        <h2 id="workPlace-heading">Work History</h2>
+        {work.length > 0 && <h2 id="workPlace-heading">Work History</h2>}
         <div className="entries">
           {work.map((work) => (
             <article key={work.id} className="workEntry">
@@ -157,7 +157,7 @@ function MainContainer({
         </div>
       </section>
       <section aria-labelledby="education-heading" className="resume-section">
-        <h2 id="education-heading">Education</h2>
+        {education.length > 0 && <h2 id="education-heading">Education</h2>}
         <div className="entries">
           {education.map((school) => (
             <article key={school.id} className="eduEntry">
@@ -212,7 +212,9 @@ function MainContainer({
         aria-labelledby="technicalSkills-heading"
         className="resume-section"
       >
-        <h2 id="technicalSkills-heading ">Technical Skills</h2>
+        {technicalSkills.length > 0 && (
+          <h2 id="technicalSkills-heading ">Technical Skills</h2>
+        )}
         <div className="entries">
           {technicalSkills.map((skill) => (
             <article key={skill.id}>
