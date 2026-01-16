@@ -38,14 +38,13 @@ function MainContainer({
 
   function moveWorkDownInArray(cv, workID) {
     const workHistory = [...cv.workHistory];
-    const index = work.findIndex((x) => x.id === workID);
+    const index = workHistory.findIndex((x) => x.id === workID);
     if (index <= 0) {
       return cv;
     }
 
     const [item] = workHistory.splice(index, 1);
     workHistory.splice(index - 1, 0, item);
-    console.log("up arrow");
     return { ...cv, workHistory };
   }
 
@@ -56,15 +55,14 @@ function MainContainer({
 
   function moveWorkUpInArray(cv, workID) {
     const workHistory = [...cv.workHistory];
-    const index = work.findIndex((w) => w.id === workID);
+    const index = workHistory.findIndex((w) => w.id === workID);
 
-    if (index === -1 || index === work.length - 1) {
+    if (index === -1 || index === cv.workHistory.length - 1) {
       return cv;
     }
 
     const [item] = workHistory.splice(index, 1);
     workHistory.splice(index + 1, 0, item);
-    console.log("down arrow");
     return { ...cv, workHistory };
   }
 
@@ -73,24 +71,40 @@ function MainContainer({
     updateState(newCV);
   }
 
-  function moveEduDownInArray(i) {
-    const tempEduHistory = [...cvData.education];
-    const index = cvData.education.findIndex((x) => x.id === i);
-    if (index > 0) {
-      const moveItem = tempEduHistory.splice(index, 1);
-      tempEduHistory.splice(index - 1, 0, moveItem[0]);
-      setCVData((prev) => ({ ...prev, education: tempEduHistory }));
+  function moveEduDownInArray(cv, eduID) {
+    const education = [...cv.education];
+    const index = education.findIndex((e) => e.id === eduID);
+
+    if (index <= 0) {
+      return cv;
     }
+
+    const [item] = education.splice(index, 1);
+    education.splice(index - 1, 0, item);
+    return { ...cv, education };
   }
 
-  function moveEduUpInArray(i) {
-    const tempEduHistory = [...cvData.education];
-    const index = cvData.education.findIndex((x) => x.id === i);
-    if (index < cvData.education.length - 1) {
-      const moveItem = tempEduHistory.splice(index, 1);
-      tempEduHistory.splice(index + 1, 0, moveItem[0]);
-      setCVData((prev) => ({ ...prev, education: tempEduHistory }));
+  function handleMoveEduDownInArray(eduID) {
+    const newCV = moveEduDownInArray(cvData.present, eduID);
+    updateState(newCV);
+  }
+
+  function moveEduUpInArray(cv, eduID) {
+    const education = [...cv.education];
+    const index = education.findIndex((e) => e.id === eduID);
+
+    if (index === -1 || index === education.length - 1) {
+      return cv;
     }
+
+    const [item] = education.splice(index, 1);
+    education.splice(index + 1, 0, item);
+    return { ...cv, education };
+  }
+
+  function handleMoveEduUpInArray(eduID) {
+    const newCV = moveEduUpInArray(cvData.present, eduID);
+    updateState(newCV);
   }
 
   return (
@@ -183,14 +197,14 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveEduDownInArray(school.id)}
+                  onClick={() => handleMoveEduDownInArray(school.id)}
                 >
                   UP
                 </button>
                 <button
                   type="button"
                   className="arrowButton"
-                  onClick={() => moveEduUpInArray(school.id)}
+                  onClick={() => handleMoveEduUpInArray(school.id)}
                 >
                   DOWN
                 </button>

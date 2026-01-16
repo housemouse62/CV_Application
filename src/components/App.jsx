@@ -85,6 +85,17 @@ function App() {
       future: [],
     }));
   }
+
+  function undo() {
+    const CVDataCopy = { ...cvData };
+    const oldPresent = CVDataCopy.past.splice(CVDataCopy.length - 1, 1);
+    setCVData(({ present, future }) => ({
+      past: [CVDataCopy],
+      present: [oldPresent],
+      future: [present, ...future],
+    }));
+  }
+
   function editEducation(id) {
     const schoolToEdit = cvData.education.find((s) => s.id === id);
     console.log(schoolToEdit);
