@@ -3,15 +3,29 @@ import "../styles/GeneralInfo.css";
 import "../styles/custom-input.css";
 
 function GeneralInfo({
+  updateState,
+  cvData,
   draftGeneralInfoData,
   setDraftGeneralInfoData,
   draftLinks,
   setDraftLinks,
-  setCVData,
 }) {
   function handleChange(e) {
     const { name, value } = e.target;
     setDraftGeneralInfoData((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function newGeneralInfo(cv, filtered) {
+    return {
+      ...cv,
+      generalInfo: draftGeneralInfoData,
+      links: filtered,
+    };
+  }
+
+  function handleNewGeneralInfo(filtered) {
+    const newCV = newGeneralInfo(cvData.present, filtered);
+    updateState(newCV);
   }
   return (
     <form>
@@ -118,11 +132,7 @@ function GeneralInfo({
             .filter(
               (link) => link.linkName.trim() !== "" && link.linkAddress !== "",
             );
-          setCVData((prev) => ({
-            ...prev,
-            generalInfo: draftGeneralInfoData,
-            links: filtered,
-          }));
+          handleNewGeneralInfo(filtered);
         }}
       >
         Save to Resume

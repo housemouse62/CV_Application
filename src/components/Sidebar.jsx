@@ -13,7 +13,6 @@ function Sidebar({
   setCVData,
   draftGeneralInfoData,
   setDraftGeneralInfoData,
-  initialLinksState,
   draftLinks,
   setDraftLinks,
   draftEducationData,
@@ -49,13 +48,13 @@ function Sidebar({
   }
   function loadEmptyCV() {
     const empty = structuredClone(emptyCV);
-    setCVData(empty);
+    updateState(empty);
     resetDrafts(empty);
   }
 
   function loadDemoCV() {
     const demo = structuredClone(demoCV);
-    setCVData(demo);
+    updateState(demo);
     resetDrafts(demo);
   }
 
@@ -98,6 +97,8 @@ function Sidebar({
           <h2 className="sidebar-header">Resume Editor</h2>
           {activeSection === "generalInfo" && (
             <GeneralInfo
+              cvData={cvData}
+              updateState={updateState}
               draftGeneralInfoData={draftGeneralInfoData}
               setDraftGeneralInfoData={setDraftGeneralInfoData}
               draftLinks={draftLinks}
@@ -108,6 +109,8 @@ function Sidebar({
           )}
           {activeSection === "education" && (
             <Education
+              cvData={cvData}
+              updateState={updateState}
               draftEducationData={draftEducationData}
               setDraftEducationData={setDraftEducationData}
               setCVData={setCVData}
@@ -118,6 +121,7 @@ function Sidebar({
           )}
           {activeSection === "workHistory" && (
             <WorkHistory
+              updateState={updateState}
               draftWorkHistory={draftWorkHistory}
               setDraftWorkHistory={setDraftWorkHistory}
               setCVData={setCVData}

@@ -1,8 +1,9 @@
 import CustomInput from "./customInput";
 function Education({
+  cvData,
+  updateState,
   draftEducationData,
   setDraftEducationData,
-  setCVData,
   editingEducationID,
   setEditingEducationID,
   initialEducationState,
@@ -12,6 +13,37 @@ function Education({
   function handleChange(e) {
     const { name, value } = e.target;
     setDraftEducationData((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function updateEduData(cv) {
+    const eduMap = cv.education.map((edu) =>
+      edu.id === editingEducationID
+        ? { ...draftEducationData, id: editingEducationID }
+        : edu,
+    );
+    return {
+      ...cv,
+      education: eduMap,
+    };
+  }
+
+  function handleUpdateEduData() {
+    const newCV = updateEduData(cvData.present);
+    updateState(newCV);
+  }
+
+  function newEduData(cv) {
+    return {
+      ...cv,
+      education: [
+        ...cv.education,
+        { ...draftEducationData, id: crypto.randomUUID() },
+      ],
+    };
+  }
+  function handleNewEduData() {
+    const newCV = newEduData(cvData.present);
+    updateState(newCV);
   }
   return (
     <form>
@@ -65,25 +97,11 @@ function Education({
         type="button"
         onClick={() => {
           if (isEditing) {
-            setCVData((prev) => ({
-              ...prev,
-              education: prev.education.map((edu) =>
-                edu.id === editingEducationID
-                  ? { ...draftEducationData, id: editingEducationID }
-                  : edu,
-              ),
-            }));
+            handleUpdateEduData();
             setEditingEducationID(null);
             setDraftEducationData(initialEducationState);
           } else {
-            setCVData((prev) => ({
-              ...prev,
-              education: [
-                ...prev.education,
-                { ...draftEducationData, id: crypto.randomUUID() },
-              ],
-            }));
-
+            handleNewEduData();
             setDraftEducationData(initialEducationState);
           }
         }}

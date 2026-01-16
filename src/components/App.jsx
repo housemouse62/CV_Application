@@ -97,7 +97,7 @@ function App() {
   }
 
   function editEducation(id) {
-    const schoolToEdit = cvData.education.find((s) => s.id === id);
+    const schoolToEdit = cvData.present.education.find((s) => s.id === id);
     console.log(schoolToEdit);
     setDraftEducationData(schoolToEdit);
     setEditingEducationID(id);
