@@ -10,7 +10,8 @@ function Sidebar({
   setActiveSection,
   updateState,
   cvData,
-  setCVData,
+  undo,
+  redo,
   draftGeneralInfoData,
   setDraftGeneralInfoData,
   draftLinks,
@@ -103,7 +104,6 @@ function Sidebar({
               setDraftGeneralInfoData={setDraftGeneralInfoData}
               draftLinks={draftLinks}
               setDraftLinks={setDraftLinks}
-              setCVData={setCVData}
               initialGeneralInfoState={initialGeneralInfoState}
             />
           )}
@@ -113,7 +113,6 @@ function Sidebar({
               updateState={updateState}
               draftEducationData={draftEducationData}
               setDraftEducationData={setDraftEducationData}
-              setCVData={setCVData}
               editingEducationID={editingEducationID}
               setEditingEducationID={setEditingEducationID}
               initialEducationState={initialEducationState}
@@ -124,7 +123,7 @@ function Sidebar({
               updateState={updateState}
               draftWorkHistory={draftWorkHistory}
               setDraftWorkHistory={setDraftWorkHistory}
-              setCVData={setCVData}
+              cvData={cvData}
               editingWorkHistoryID={editingWorkHistoryID}
               setEditingWorkHistoryID={setEditingWorkHistoryID}
               initialWorkHistoryState={initialWorkHistoryState}
@@ -132,9 +131,10 @@ function Sidebar({
           )}
           {activeSection === "technicalSkills" && (
             <TechnicalSkills
+              updateState={updateState}
+              cvData={cvData}
               draftTechnicalSkills={draftTechnicalSkills}
               setDraftTechnicalSkills={setDraftTechnicalSkills}
-              setCVData={setCVData}
               editingTechnicalID={editingTechnicalID}
               setEditingTechnicalID={setEditingTechnicalID}
               initialTechnicalSkillsState={initialTechnicalSkillsState}
@@ -146,6 +146,13 @@ function Sidebar({
             </button>
             <button className="demo" onClick={() => loadDemoCV()}>
               Show Demo
+            </button>
+            <br />
+            <button className="undoRedo" onClick={() => undo()}>
+              Undo
+            </button>
+            <button className="undoRedo" onClick={() => undo()}>
+              Redo
             </button>
           </nav>
         </div>

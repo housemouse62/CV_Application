@@ -2,20 +2,17 @@ import "../styles/MainContainer.css";
 
 function MainContainer({
   cvData,
-  setCVData,
   generalInfo,
   education,
   editEducation,
-  deleteEducation,
+  handleDeleteEducation,
   work,
   links,
   editWorkPlace,
-  deleteWorkPlace,
+  handleDeleteWorkPlace,
   technicalSkills,
   editTechnicalSkills,
-  deleteTechnicalSkills,
-  setDraftWorkHistory,
-  draftWorkHistory,
+  handleDeleteTechnicalSkills,
   updateState,
 }) {
   const contactItems = [
@@ -107,6 +104,42 @@ function MainContainer({
     updateState(newCV);
   }
 
+  function moveSkillsUpInArray(cv, skillID) {
+    const technicalSkills = [...cv.technicalSkills];
+    const index = technicalSkills.findIndex((s) => s.id === skillID);
+
+    if (index === -1 || index === technicalSkills.length - 1) {
+      return cv;
+    }
+
+    const [item] = technicalSkills.splice(index, 1);
+    technicalSkills.splice(index + 1, 0, item);
+    return { ...cv, technicalSkills };
+  }
+
+  function handleMoveSkillsUpInArray(skillID) {
+    const newCV = moveSkillsUpInArray(cvData.present, skillID);
+    updateState(newCV);
+  }
+
+  function moveSkillsDownInArray(cv, skillID) {
+    const technicalSkills = [...cv.technicalSkills];
+    const index = technicalSkills.findIndex((s) => s.id === skillID);
+
+    if (index <= 0) {
+      return cv;
+    }
+
+    const [item] = technicalSkills.splice(index, 1);
+    technicalSkills.splice(index - 1, 0, item);
+    return { ...cv, technicalSkills };
+  }
+
+  function handleMoveSkillsDownInArray(skillID) {
+    const newCV = moveSkillsDownInArray(cvData.present, skillID);
+    updateState(newCV);
+  }
+
   return (
     <main className="resume">
       <header className="resume-header">
@@ -160,7 +193,7 @@ function MainContainer({
                       </button>
                       <button
                         className="editWorkPlace"
-                        onClick={() => deleteWorkPlace(work.id)}
+                        onClick={() => handleDeleteWorkPlace(work.id)}
                         aria-label={`Delete ${work.workPlaceName}`}
                       >
                         Delete
@@ -221,7 +254,7 @@ function MainContainer({
                 </button>
                 <button
                   className="editSchool"
-                  onClick={() => deleteEducation(school.id)}
+                  onClick={() => handleDeleteEducation(school.id)}
                   aria-label={`Delete ${school.schoolName}`}
                 >
                   Delete
@@ -249,28 +282,46 @@ function MainContainer({
         )}
         <div className="entries">
           {technicalSkills.map((skill) => (
-            <article key={skill.id}>
-              <h3 className="technicalSkills">{skill.skillCategory}</h3>
-              <button
-                className="editTechnicalSkills"
-                onClick={() => editTechnicalSkills(skill.id)}
-                aria-label={`Edit ${skill.skillCategory}`}
-              >
-                Edit
-              </button>
-              <button
-                className="editTechnicalSkills"
-                onClick={() => deleteTechnicalSkills(skill.id)}
-                aria-label={`Delete ${skill.skillCategory}`}
-              >
-                Delete
-              </button>
-              <br />
-              <ul>
-                {skill.skills.map((skill, index) => (
-                  <li key={skill.id}>{skill.value}</li>
-                ))}
-              </ul>
+            <article key={skill.id} className="skillEntry">
+              <div className="arrowDiv">
+                <button
+                  type="button"
+                  className="arrowButton"
+                  onClick={() => handleMoveSkillsDownInArray(skill.id)}
+                >
+                  UP
+                </button>
+                <button
+                  type="button"
+                  className="arrowButton"
+                  onClick={() => handleMoveSkillsUpInArray(skill.id)}
+                >
+                  DOWN
+                </button>
+              </div>
+              <div className="skillsInfo">
+                <h3 className="technicalSkills">{skill.skillCategory}</h3>
+                <button
+                  className="editTechnicalSkills"
+                  onClick={() => editTechnicalSkills(skill.id)}
+                  aria-label={`Edit ${skill.skillCategory}`}
+                >
+                  Edit
+                </button>
+                <button
+                  className="editTechnicalSkills"
+                  onClick={() => handleDeleteTechnicalSkills(skill.id)}
+                  aria-label={`Delete ${skill.skillCategory}`}
+                >
+                  Delete
+                </button>
+                <br />
+                <ul>
+                  {skill.skills.map((skill, index) => (
+                    <li key={skill.id}>{skill.value}</li>
+                  ))}
+                </ul>
+              </div>
             </article>
           ))}
         </div>

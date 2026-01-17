@@ -20,7 +20,8 @@ header {
 }
 
 .workEntry,
-.eduEntry {
+.eduEntry,
+.skillEntry {
   display: flex;
 }
 
@@ -28,6 +29,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-right: 20px;
 }
 
 .schoolName,

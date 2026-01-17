@@ -79,21 +79,45 @@ function App() {
   });
 
   function updateState(newPresent) {
+    console.log("UPDATE", {
+      past: cvData.past.length,
+      future: cvData.future.length,
+    });
+    const snapShot = structuredClone(newPresent);
+
     setCVData(({ past, present }) => ({
-      past: [...past, present],
-      present: newPresent,
+      past: [...past, structuredClone(present)],
+      present: snapShot,
       future: [],
     }));
   }
 
   function undo() {
-    const CVDataCopy = { ...cvData };
-    const oldPresent = CVDataCopy.past.splice(CVDataCopy.length - 1, 1);
-    setCVData(({ present, future }) => ({
-      past: [CVDataCopy],
-      present: [oldPresent],
-      future: [present, ...future],
-    }));
+    setCVData(({ past, present, future }) => {
+      if (past.length === 0) return { past, present, future };
+
+      const previous = past[past.length - 1];
+
+      return {
+        past: past.slice(0, -1),
+        present: previous,
+        future: [present, ...future],
+      };
+    });
+  }
+
+  function redo() {
+    setCVData(({ past, present, future }) => {
+      if (future.length === 0) return { past, present, future };
+
+      const next = future[0];
+
+      return {
+        past: [...past, present],
+        present: next,
+        future: future.slice(1),
+      };
+    });
   }
 
   function editEducation(id) {
@@ -104,50 +128,69 @@ function App() {
     setActiveSection("education");
   }
 
-  function deleteEducation(id) {
+  function deleteEducation(cv, id) {
     if (editingEducationID === id) {
       setDraftEducationData(initialEducationState);
       setEditingEducationID(null);
     }
-    const schools = cvData.education.filter((edu) => edu.id !== id);
+    const schools = cvData.present.education.filter((edu) => edu.id !== id);
 
-    setCVData((prev) => ({ ...prev, education: schools }));
+    return { ...cv, education: schools };
+  }
+
+  function handleDeleteEducation(id) {
+    const newCV = deleteEducation(cvData.present, id);
+    updateState(newCV);
   }
 
   function editWorkPlace(id) {
-    const workToEdit = cvData.workHistory.find((w) => w.id === id);
+    const workToEdit = cvData.present.workHistory.find((w) => w.id === id);
+
+    console.log(
+      draftWorkHistory ===
+        cvData.present.workHistory.find((w) => w.id === editingWorkHistoryID),
+    );
+
     setDraftWorkHistory(workToEdit);
     setEditingWorkHistoryID(id);
     setActiveSection("workHistory");
   }
 
-  function deleteWorkPlace(id) {
+  function deleteWorkPlace(cv, id) {
     if (editingWorkHistoryID === id) {
       setDraftWorkHistory(initialWorkHistoryState);
       setEditingWorkHistoryID(null);
     }
-    const workPlaces = cvData.workHistory.filter((work) => work.id !== id);
+    const workPlaces = cv.workHistory.filter((work) => work.id !== id);
+    return { ...cv, workHistory: workPlaces };
+  }
 
-    setCVData((prev) => ({ ...prev, workHistory: workPlaces }));
+  function handleDeleteWorkPlace(id) {
+    const newCV = deleteWorkPlace(cvData.present, id);
+    updateState(newCV);
   }
 
   function editTechnicalSkills(id) {
-    const skillToEdit = cvData.technicalSkills.find((s) => s.id === id);
+    const skillToEdit = cvData.present.technicalSkills.find((s) => s.id === id);
     setDraftTechnicalSkills(skillToEdit);
     setEditingTechnicalID(id);
     setActiveSection("technicalSkills");
   }
 
-  function deleteTechnicalSkills(id) {
+  function deleteTechnicalSkills(cv, id) {
     if (editingTechnicalID === id) {
       setDraftTechnicalSkills(initialTechnicalSkillsState);
       setEditingTechnicalID(null);
     }
-    const technicalSkills = cvData.technicalSkills.filter(
+    const technicalSkills = cvData.present.technicalSkills.filter(
       (skill) => skill.id !== id,
     );
+    return { ...cv, technicalSkills: technicalSkills };
+  }
 
-    setCVData((prev) => ({ ...prev, technicalSkills: technicalSkills }));
+  function handleDeleteTechnicalSkills(id) {
+    const newCV = deleteTechnicalSkills(cvData.present, id);
+    updateState(newCV);
   }
 
   return (
@@ -156,6 +199,9 @@ function App() {
         updateState={updateState}
         cvData={cvData}
         setCVData={setCVData}
+        undo={undo}
+        redo={redo}
+        handleDeleteWorkPlace={handleDeleteWorkPlace}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
         draftGeneralInfoData={draftGeneralInfoData}
@@ -189,14 +235,15 @@ function App() {
         education={cvData.present.education}
         setDraftEducationData={setDraftEducationData}
         editEducation={editEducation}
-        deleteEducation={deleteEducation}
+        handleDeleteEducation={handleDeleteEducation}
         work={cvData.present.workHistory}
         draftWorkHistory={draftWorkHistory}
         setDraftWorkHistory={setDraftWorkHistory}
         editWorkPlace={editWorkPlace}
-        deleteWorkPlace={deleteWorkPlace}
+        handleDeleteWorkPlace={handleDeleteWorkPlace}
         technicalSkills={cvData.present.technicalSkills}
         setDraftTechnicalSkills={setDraftTechnicalSkills}
+        handleDeleteTechnicalSkills={handleDeleteTechnicalSkills}
         editTechnicalSkills={editTechnicalSkills}
         deleteTechnicalSkills={deleteTechnicalSkills}
       />

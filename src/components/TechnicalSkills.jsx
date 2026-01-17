@@ -1,6 +1,7 @@
 import CustomInput from "./customInput";
 function TechnicalSkills({
-  setCVData,
+  cvData,
+  updateState,
   draftTechnicalSkills,
   setDraftTechnicalSkills,
   editingTechnicalID,
@@ -12,6 +13,34 @@ function TechnicalSkills({
   function handleChange(e) {
     const { name, value } = e.target;
     setDraftTechnicalSkills((prev) => ({ ...prev, [name]: value }));
+  }
+  function updateTechSkills(cv) {
+    const techMap = cv.technicalSkills.map((skill) =>
+      skill.id === editingTechnicalID
+        ? { ...draftTechnicalSkills, id: editingTechnicalID }
+        : skill,
+    );
+    return { ...cv, technicalSkills: techMap };
+  }
+
+  function handleUpdateTechSkills() {
+    const newCV = updateTechSkills(cvData.present);
+    updateState(newCV);
+  }
+
+  function newTechSkills(cv) {
+    return {
+      ...cv,
+      technicalSkills: [
+        ...cv.technicalSkills,
+        { ...draftTechnicalSkills, id: crypto.randomUUID() },
+      ],
+    };
+  }
+
+  function handleNewTechSkills() {
+    const newCV = newTechSkills(cvData.present);
+    updateState(newCV);
   }
 
   return (
@@ -34,7 +63,8 @@ function TechnicalSkills({
               className="skill"
               onChange={(e) => {
                 const updated = [...draftTechnicalSkills.skills];
-                updated[index] = e.target.value;
+                updated[index] = { ...updated[index], value: e.target.value };
+                console.log(updated);
                 setDraftTechnicalSkills((prev) => ({
                   ...prev,
                   skills: updated,
@@ -65,7 +95,7 @@ function TechnicalSkills({
         onClick={() =>
           setDraftTechnicalSkills((prev) => ({
             ...prev,
-            skills: [...prev.skills, ""],
+            skills: [...prev.skills, { id: crypto.randomUUID, value: "" }],
           }))
         }
       >
@@ -75,24 +105,11 @@ function TechnicalSkills({
         type="button"
         onClick={() => {
           if (isEditing) {
-            setCVData((prev) => ({
-              ...prev,
-              technicalSkills: prev.technicalSkills.map((skill) =>
-                skill.id === editingTechnicalID
-                  ? { ...draftTechnicalSkills, id: editingTechnicalID }
-                  : skill,
-              ),
-            }));
+            handleUpdateTechSkills();
             setEditingTechnicalID(null);
             setDraftTechnicalSkills(initialTechnicalSkillsState);
           } else {
-            setCVData((prev) => ({
-              ...prev,
-              technicalSkills: [
-                ...prev.technicalSkills,
-                { ...draftTechnicalSkills, id: crypto.randomUUID() },
-              ],
-            }));
+            handleNewTechSkills();
             setEditingTechnicalID(null);
             setDraftTechnicalSkills(initialTechnicalSkillsState);
           }

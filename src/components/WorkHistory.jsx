@@ -1,18 +1,58 @@
 import CustomInput from "./customInput";
 function WorkHistory({
   cvData,
-  setCVData,
+  updateState,
   draftWorkHistory,
   setDraftWorkHistory,
   editingWorkHistoryID,
   setEditingWorkHistoryID,
   initialWorkHistoryState,
+  handleDeleteWorkPlace,
 }) {
   const isEditing = editingWorkHistoryID !== null;
 
   function handleChange(e) {
     const { name, value } = e.target;
     setDraftWorkHistory((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function updateWorkHistory(cv, cleanedDuties) {
+    return {
+      ...cv,
+      workHistory: cv.workHistory.map((work) =>
+        work.id === editingWorkHistoryID
+          ? {
+              ...draftWorkHistory,
+              duties: cleanedDuties,
+              id: editingWorkHistoryID,
+            }
+          : work,
+      ),
+    };
+  }
+
+  function handleUpdateWorkHistory(cleanedDuties) {
+    const newCV = updateWorkHistory(cvData.present, cleanedDuties);
+    updateState(newCV);
+  }
+
+  function newWorkHistory(cv, cleanedDuties) {
+    return {
+      ...cv,
+      workHistory: [
+        ...cv.workHistory,
+        {
+          ...draftWorkHistory,
+          duties: cleanedDuties,
+          id: crypto.randomUUID(),
+        },
+      ],
+    };
+  }
+
+  function handleNewWorkHistory(cleanedDuties) {
+    const newCV = newWorkHistory(cvData.present, cleanedDuties);
+    updateState(newCV);
   }
 
   return (
@@ -70,7 +110,8 @@ function WorkHistory({
               className="duty"
               onChange={(e) => {
                 const updated = [...draftWorkHistory.duties];
-                updated[index] = e.target.value;
+                updated[index] = { ...updated[index], value: e.target.value };
+
                 setDraftWorkHistory((prev) => ({
                   ...prev,
                   duties: updated,
@@ -98,7 +139,7 @@ function WorkHistory({
         onClick={() =>
           setDraftWorkHistory((prev) => ({
             ...prev,
-            duties: [...prev.duties, ""],
+            duties: [...prev.duties, { id: crypto.randomUUID(), value: "" }],
           }))
         }
       >
@@ -115,32 +156,11 @@ function WorkHistory({
             .filter((duty) => duty.value !== "");
 
           if (isEditing) {
-            setCVData((prev) => ({
-              ...prev,
-              workHistory: prev.workHistory.map((work) =>
-                work.id === editingWorkHistoryID
-                  ? {
-                      ...draftWorkHistory,
-                      duties: cleanedDuties,
-                      id: editingWorkHistoryID,
-                    }
-                  : work,
-              ),
-            }));
+            handleUpdateWorkHistory(cleanedDuties);
             setEditingWorkHistoryID(null);
             setDraftWorkHistory(initialWorkHistoryState);
           } else {
-            setCVData((prev) => ({
-              ...prev,
-              workHistory: [
-                ...prev.workHistory,
-                {
-                  ...draftWorkHistory,
-                  duties: cleanedDuties,
-                  id: crypto.randomUUID(),
-                },
-              ],
-            }));
+            handleNewWorkHistory(cleanedDuties);
             setEditingWorkHistoryID(null);
             setDraftWorkHistory(initialWorkHistoryState);
             console.log(cvData);

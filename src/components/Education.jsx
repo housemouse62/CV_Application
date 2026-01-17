@@ -41,10 +41,12 @@ function Education({
       ],
     };
   }
+
   function handleNewEduData() {
     const newCV = newEduData(cvData.present);
     updateState(newCV);
   }
+
   return (
     <form>
       <CustomInput
