@@ -141,17 +141,31 @@ function Sidebar({
             />
           )}
           <nav className="demoControl">
-            <button className="demo" onClick={() => loadEmptyCV()}>
+            <button
+              type="button"
+              className="demo"
+              onClick={() => loadEmptyCV()}
+            >
               Clear CV
             </button>
-            <button className="demo" onClick={() => loadDemoCV()}>
+            <button type="button" className="demo" onClick={() => loadDemoCV()}>
               Show Demo
             </button>
             <br />
-            <button className="undoRedo" onClick={() => undo()}>
+            <button
+              type="button"
+              className="undoRedo"
+              disabled={cvData.past.length === 0}
+              onClick={() => undo()}
+            >
               Undo
             </button>
-            <button className="undoRedo" onClick={() => undo()}>
+            <button
+              type="button"
+              className="undoRedo"
+              disabled={cvData.future.length === 0}
+              onClick={() => undo()}
+            >
               Redo
             </button>
           </nav>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import CustomInput from "./customInput";
 function WorkHistory({
   cvData,
@@ -7,53 +8,124 @@ function WorkHistory({
   editingWorkHistoryID,
   setEditingWorkHistoryID,
   initialWorkHistoryState,
-  handleDeleteWorkPlace,
 }) {
   const isEditing = editingWorkHistoryID !== null;
+
+  useEffect(() => {
+    if (!editingWorkHistoryID) {
+      setDraftWorkHistory(initialWorkHistoryState);
+      return;
+    }
+
+    const work = cvData.present.workHistory.find(
+      (w) => w.id === editingWorkHistoryID,
+    );
+
+    if (work) {
+      setDraftWorkHistory(work);
+    }
+  }, [editingWorkHistoryID, cvData.present.workHistory]);
 
   function handleChange(e) {
     const { name, value } = e.target;
     setDraftWorkHistory((prev) => ({ ...prev, [name]: value }));
   }
 
-  function updateWorkHistory(cv, cleanedDuties) {
-    return {
-      ...cv,
-      workHistory: cv.workHistory.map((work) =>
-        work.id === editingWorkHistoryID
-          ? {
-              ...draftWorkHistory,
-              duties: cleanedDuties,
-              id: editingWorkHistoryID,
-            }
-          : work,
-      ),
-    };
+  function buildUpdatedCV(cv, cleanedDuties) {
+    if (isEditing) {
+      return {
+        ...cv,
+        workHistory: cv.workHistory.map((work) =>
+          work.id === editingWorkHistoryID
+            ? {
+                ...draftWorkHistory,
+                duties: cleanedDuties,
+                id: editingWorkHistoryID,
+              }
+            : work,
+        ),
+      };
+    } else {
+      return {
+        ...cv,
+        workHistory: [
+          ...cv.workHistory,
+          {
+            ...draftWorkHistory,
+            duties: cleanedDuties,
+            id: crypto.randomUUID(),
+          },
+        ],
+      };
+    }
   }
 
-  function handleUpdateWorkHistory(cleanedDuties) {
-    const newCV = updateWorkHistory(cvData.present, cleanedDuties);
+  function handleSave() {
+    const hasRequiredFields = draftWorkHistory.workPlaceName.trim() !== "";
+    if (!hasRequiredFields) return;
+
+    const cleanedDuties = draftWorkHistory.duties
+      .map((duty) => ({ ...duty, value: duty.value.trim() }))
+      .filter((duty) => duty.value !== "");
+
+    const newCV = buildUpdatedCV(cvData.present, cleanedDuties);
     updateState(newCV);
+
+    setEditingWorkHistoryID(null);
+    setDraftWorkHistory(initialWorkHistoryState);
   }
 
-  function newWorkHistory(cv, cleanedDuties) {
-    return {
-      ...cv,
-      workHistory: [
-        ...cv.workHistory,
-        {
-          ...draftWorkHistory,
-          duties: cleanedDuties,
-          id: crypto.randomUUID(),
-        },
-      ],
-    };
+  function handleDeleteDuty(index) {
+    setDraftWorkHistory((prev) => ({
+      ...prev,
+      duties: prev.duties.filter((_, i) => i !== index),
+    }));
   }
 
-  function handleNewWorkHistory(cleanedDuties) {
-    const newCV = newWorkHistory(cvData.present, cleanedDuties);
-    updateState(newCV);
+  function handleAddDuty() {
+    setDraftWorkHistory((prev) => ({
+      ...prev,
+      duties: [...prev.duties, { id: crypto.randomUUID(), value: "" }],
+    }));
   }
+  // function updateWorkHistory(cv, cleanedDuties) {
+  //   return {
+  //     ...cv,
+  //     workHistory: cv.workHistory.map((work) =>
+  //       work.id === editingWorkHistoryID
+  //         ? {
+  //             ...draftWorkHistory,
+  //             duties: cleanedDuties,
+  //             id: editingWorkHistoryID,
+  //           }
+  //         : work,
+  //     ),
+  //   };
+  // }
+
+  // function handleUpdateWorkHistory(cleanedDuties) {
+  //   const newCV = updateWorkHistory(cvData.present, cleanedDuties);
+  //   updateState(newCV);
+  // }
+
+  // function newWorkHistory(cv, cleanedDuties) {
+  //   return {
+  //     ...cv,
+  //     workHistory: [
+  //       ...cv.workHistory,
+  //       {
+  //         ...draftWorkHistory,
+  //         duties: cleanedDuties,
+  //         id: crypto.randomUUID(),
+  //       },
+  //     ],
+  //   };
+  // }
+
+  // function handleNewWorkHistory(cleanedDuties) {
+  //   const newCV = newWorkHistory(cvData.present, cleanedDuties);
+  //   updateState(newCV);
+  // }
 
   return (
     <form>
@@ -100,73 +172,35 @@ function WorkHistory({
         onChange={handleChange}
       />
       <div className="duties">
-        <label htmlFor="Experience">Experience</label>
+        <label className="Experience">Experience</label>
         {draftWorkHistory.duties.map((duty, index) => (
           <div className="dutyLine" key={duty.id}>
             <input
-              label="Experience "
               type="text"
-              value={duty.value}
               className="duty"
+              value={duty.value}
               onChange={(e) => {
                 const updated = [...draftWorkHistory.duties];
                 updated[index] = { ...updated[index], value: e.target.value };
-
-                setDraftWorkHistory((prev) => ({
-                  ...prev,
-                  duties: updated,
-                }));
+                setDraftWorkHistory((prev) => ({ ...prev, duties: updated }));
               }}
+              aria-label={`Experience ${index + 1}`}
             />
             <button
               type="button"
               className="deleteDuty"
-              onClick={() => {
-                const newDuties = draftWorkHistory.duties.filter(
-                  (_, i) => i !== index,
-                );
-                setDraftWorkHistory((prev) => ({ ...prev, duties: newDuties }));
-              }}
+              onClick={() => handleDeleteDuty(index)}
+              aria-label={`Delete experience ${index + 1}`}
             >
               X
             </button>
           </div>
         ))}
+        <button className="addDuty" type="button" onClick={handleAddDuty}>
+          Add duty
+        </button>
       </div>
-      <button
-        className="addDuty"
-        type="button"
-        onClick={() =>
-          setDraftWorkHistory((prev) => ({
-            ...prev,
-            duties: [...prev.duties, { id: crypto.randomUUID(), value: "" }],
-          }))
-        }
-      >
-        Add duty
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          const hasRequiredFields =
-            draftWorkHistory.workPlaceName.trim() !== "";
-          if (!hasRequiredFields) return;
-          const cleanedDuties = draftWorkHistory.duties
-            .map((duty) => ({ ...duty, value: duty.value.trim() }))
-            .filter((duty) => duty.value !== "");
-
-          if (isEditing) {
-            handleUpdateWorkHistory(cleanedDuties);
-            setEditingWorkHistoryID(null);
-            setDraftWorkHistory(initialWorkHistoryState);
-          } else {
-            handleNewWorkHistory(cleanedDuties);
-            setEditingWorkHistoryID(null);
-            setDraftWorkHistory(initialWorkHistoryState);
-            console.log(cvData);
-          }
-        }}
-      >
+      <button type="button" onClick={handleSave}>
         {isEditing ? "Save" : "Add to Resume"}{" "}
         <span className="visually-hidden">work history entry</span>
       </button>

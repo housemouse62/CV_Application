@@ -79,15 +79,15 @@ function App() {
   });
 
   function updateState(newPresent) {
+    console.log("UPDATE STATE — clearing future");
     console.log("UPDATE", {
       past: cvData.past.length,
       future: cvData.future.length,
     });
-    const snapShot = structuredClone(newPresent);
 
     setCVData(({ past, present }) => ({
-      past: [...past, structuredClone(present)],
-      present: snapShot,
+      past: [...past, present],
+      present: newPresent,
       future: [],
     }));
   }
