@@ -169,6 +169,15 @@ function Sidebar({
               Redo
             </button>
           </nav>
+          <nav className="print-area">
+            <button
+              type="button"
+              className="print"
+              onClick={() => window.print()}
+            >
+              Print Resume
+            </button>
+          </nav>
         </div>
       </aside>
     </div>

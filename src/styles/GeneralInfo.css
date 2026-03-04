@@ -14,3 +14,15 @@ button:focus-visible {
   outline: 2px solid #000;
   outline-offset: 2px;
 }
+
+.deleteLink {
+  margin-left: 5px;
+  border-radius: 15px;
+  border: 1px black solid;
+  padding: 5px 10px;
+}
+
+.linkbox {
+  margin-right: 5px;
+  width: 80px;
+}

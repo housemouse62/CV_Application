@@ -55,12 +55,24 @@ form {
   right: -1px;
 }
 
+.tab:hover {
+  background-color: rgb(225, 222, 222);
+}
+
 .demoControl {
   margin: 9px;
 }
 
 .demo {
-  margin-right: 10px;
+  margin: 20px 10px 0 0;
+}
+
+.undoRedo {
+  margin: 10px 10px 0 0;
+}
+
+.print-area {
+  margin: 9px;
 }
 
 .duties,

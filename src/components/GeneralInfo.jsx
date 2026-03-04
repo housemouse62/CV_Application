@@ -69,6 +69,7 @@ function GeneralInfo({
               type="text"
               id={`link-name-${link.id}`}
               placeholder="LinkdIn"
+              className="linkbox"
               value={link.linkName}
               onChange={(e) => {
                 setDraftLinks((prev) =>

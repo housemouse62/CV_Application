@@ -16,7 +16,7 @@ const demoCV = {
     userFirstName: "Ryan",
     userLastName: "Skeels",
     userEmail: "ryan.skeels@gmail.com",
-    userPhone: "666 53 71 84",
+    userPhone: "970 901 4810",
   },
   links: [
     {
@@ -69,20 +69,29 @@ const demoCV = {
     },
     {
       id: crypto.randomUUID(),
-      schoolName: "Self-Driven Learning",
+      schoolName: "Full Stack Javascript Course",
       cityName: "Online",
       stateName: "",
       countryName: "",
-      degreeName: "Web Development",
+      degreeName: "Self-led Web Development Curriculum",
       year: "2025 - Present",
+    },
+    {
+      id: crypto.randomUUID(),
+      schoolName: "Trusted Tester",
+      cityName: "Online",
+      stateName: "",
+      countryName: "",
+      degreeName: "DHS Web Accesibility Testing Certification",
+      year: "June 2025",
     },
   ],
   workHistory: [
     {
       id: crypto.randomUUID(),
       ind: 0,
-      positionTitle: "English Language Assistant",
-      workPlaceName: "CEIP San Clemente",
+      positionTitle: "English Language Teacher & Tutor",
+      workPlaceName: "CEIP San Clemente & Online",
       dates: "Oct 2024 - Present",
       city: "Sedaví",
       state: "Valencia",
@@ -90,24 +99,17 @@ const demoCV = {
       duties: [
         {
           id: crypto.randomUUID(),
-          value: "Support English language instruction for students K–6",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Collaborate with teachers and school leadership",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Classroom management and lesson planning",
+          value:
+            "Facilitate bilingual instruction and knowledge transfer within Spanish-led classrooms, strengthening cross-cultural communication and operational adaptability.",
         },
       ],
     },
     {
       id: crypto.randomUUID(),
       ind: 1,
-      positionTitle:
-        "Freelance Content Designer & Visual Communications Specialist",
-      workPlaceName: "Andrea Moore Arts (Projects for Special Olympics)",
+      positionTitle: "Content Designer & Visual Communications Specialist",
+      workPlaceName:
+        "Andrea Moore Arts (Special Olympics International projects)",
       dates: " June 2024 - Present",
       city: "",
       state: "",
@@ -116,57 +118,22 @@ const demoCV = {
         {
           id: crypto.randomUUID(),
           value:
-            "Created a cohesive icon library aligned with disability-related vocabulary and visual accessibility standards.",
+            "Created a cohesive icon library and aligned with disability-related vocabulary and curated a visual public health timeline aligned with accessibility standards.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Designed presentation materials in Canva and outlined educational slide decks focused on navigating healthcare systems for individuals with developmental disabilities and their advocates.",
-        },
-        {
-          id: crypto.randomUUID(),
-          value:
-            "Sourced and organized visuals for timelines showcasing public health and disability rights milestones.",
-        },
-        {
-          id: crypto.randomUUID(),
-          value:
-            "Wrote alt-text for images to support screen reader compatibility and ensure inclusive access to all materials.",
+            "Designed presentation materials and educational slide decks focused on navigating healthcare systems for individuals with developmental disabilities and their advocates, including alt-text for images to support screen reader compatibility. ",
         },
       ],
     },
-    {
-      id: crypto.randomUUID(),
-      ind: 2,
-      positionTitle: "English Tutor",
-      workPlaceName: "Preply & LingoAce | Online",
-      dates: " June 2024 - Present",
-      city: "",
-      state: "",
-      country: "",
-      duties: [
-        {
-          id: crypto.randomUUID(),
-          value:
-            "Deliver personalized 1-on-1 English lessons to learners of all levels in a virtual classroom setting.",
-        },
-        {
-          id: crypto.randomUUID(),
-          value:
-            "Plan and adapt lessons to meet individual learning goals, focusing on conversation, grammar, vocabulary, and real-world usage.",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Utilize interactive tools and authentic materials",
-        },
-      ],
-    },
+
     {
       id: crypto.randomUUID(),
       ind: 3,
-      positionTitle: "Planned Career Break",
-      workPlaceName: "Preply & LingoAce | Online",
-      dates: "March 2023 - January 2024 ",
+      positionTitle: "Planned Career Break | Family relocation to Spain",
+      workPlaceName: "",
+      dates: "March 2023 - Present",
       city: "",
       state: "",
       country: "",
@@ -174,68 +141,69 @@ const demoCV = {
         {
           id: crypto.randomUUID(),
           value:
-            "Transitioned ownership of Baere Brewing Company, including staff support, systems handover, and process documentation.",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Completed a 120-hour TEFL certification course",
+            "Managed sale of Baere Brewing Company, including operational handover, documentation, and staff transition.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Managed the visa application process and international relocation for family ",
+            "Executed international relocation, overseeing visa process and family resettlement logistics.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Began immersive Spanish language learning through formal classes",
+            "Completed TEFL certification and 18-month Spanish language immersion; currently teaching in a Spanish public primary school.",
         },
       ],
     },
     {
       id: crypto.randomUUID(),
       ind: 4,
-      positionTitle: "Operating Manager  |  Owner  |  Founder",
+      positionTitle: "Co-Owner  |  Co-Founder  |  Operations Manager",
       workPlaceName: "Baere Brewing Company",
       dates: "2012 - 2023",
       city: "Denver",
       state: "Colorado",
-      country: "USA",
+      country: "",
       duties: [
         {
           id: crypto.randomUUID(),
           value:
-            "Co-founded and operated a successful craft brewery, overseeing both production and retail operations in compliance with local and federal regulations.",
+            "Co-founded and operated a craft brewery, overseeing production, retail, and distribution operations in compliance with local, state, and federal regulations.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Directed business development from concept to launch, including buildout planning, equipment sourcing, and installation.",
+            "Directed business development from concept to launch, including site selection, buildout, equipment sourcing, and full operational setup.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Led product development and brewing operations, creating original recipes and managing all aspects of brewing, packaging, and delivery.",
+            "Oversaw financial operations and managed ~$500,000 annual cash flow, including budgeting, payroll, accounting, and tax compliance.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Managed financial operations, including payroll, accounting, and vendor payments, using best practices for small business bookkeeping.",
+            "Developed and implemented HR policies, hiring procedures, and team management systems to support a collaborative and accountable workplace.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Developed and implemented HR policies, hiring procedures, and team management systems to support a collaborative work environment.",
+            "Established internal systems and safety protocols in partnership with CSU Health & Safety to maintain OSHA-compliant operations.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Oversaw marketing strategy, social media, graphic design, and community engagement efforts, including a long-running Non-Profit of the Month program.",
+            "Led company-wide operational pivot during COVID-19, transitioning from on-site service to packaging and distribution, implementing online ordering and revised logistics workflows.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Handled procurement of ingredients and materials, equipment maintenance, and facility upkeep",
+            "Managed vendor relationships, procurement, and facility operations to ensure production continuity and cost control.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Built community partnerships, including a recurring “Charity of the Month” initiative supporting local nonprofits.",
         },
       ],
     },
@@ -247,32 +215,37 @@ const demoCV = {
       dates: "2012 - 2014",
       city: "Denver",
       state: "Colorado",
-      country: "USA",
+      country: "",
       duties: [
         {
           id: crypto.randomUUID(),
           value:
-            "Conducted public health inspections for food manufacturing and retail facilities to ensure compliance with health codes.",
+            "Conducted regulatory inspections for food manufacturing and retail facilities, ensuring compliance with municipal and state health codes.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Authored inspection reports, summaries, and recommendations to support enforcement and education.",
+            "Advised business owners on risk mitigation strategies and operational improvements to reduce public health hazards.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Developed and delivered training programs for new staff, as well as food facility personnel.",
+            "Authored detailed inspection reports and enforcement documentation to support corrective action and legal proceedings.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Responded to foodborne illness reports and public complaints, executing follow-up investigations and enforcing corrective actions.",
+            "Investigated foodborne illness complaints and public reports, coordinating follow-up actions and compliance measures.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Led temporary closures and represented the department in legal proceedings related to public health violations.",
+            "Developed and delivered training programs for new staff and facility operators on regulatory standards and safe operating practices.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Led temporary facility closures and represented the department in formal enforcement and legal processes.",
         },
       ],
     },
@@ -284,32 +257,37 @@ const demoCV = {
       dates: "2008 - 2012",
       city: "Golden",
       state: "Colorado",
-      country: "USA",
+      country: "",
       duties: [
         {
           id: crypto.randomUUID(),
           value:
-            "Designed and managed forest restoration and habitat conservation projects across public lands.",
+            "Designed and executed large-scale forest restoration and habitat conservation projects across public lands.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Wrote detailed management plans, ecological assessments, and project reports based on field data.",
+            "Managed project lifecycles including planning, field implementation, data analysis, and reporting.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Collected, analyzed, and interpreted environmental data to guide resource decisions.",
+            "Collected and interpreted environmental data to inform resource management decisions and long-term planning.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Trained and supervised seasonal staff; led educational programming on machinery safety and environmental topics.",
+            "Supervised and trained seasonal field crews, emphasizing safety protocols, risk mitigation, and equipment stewardship.",
         },
         {
           id: crypto.randomUUID(),
           value:
-            "Developed training materials and protocols for internal programs and public outreach.",
+            "Developed operational procedures and training materials to improve internal program efficiency and compliance.",
+        },
+        {
+          id: crypto.randomUUID(),
+          value:
+            "Created and delivered public-facing educational programming and community outreach initiatives.",
         },
       ],
     },
@@ -317,35 +295,23 @@ const demoCV = {
   technicalSkills: [
     {
       id: crypto.randomUUID(),
-      skillCategory: "Business",
+      skillCategory: "Operations & Strategy",
       skills: [
         {
           id: crypto.randomUUID(),
-          value: "Business Development & Strategy",
+          value: "Operations Management",
         },
         {
           id: crypto.randomUUID(),
-          value: "Operations & Project Management",
+          value: "Business Development",
         },
         {
           id: crypto.randomUUID(),
-          value: "Policy & Procedure Development",
+          value: "Project Management",
         },
         {
           id: crypto.randomUUID(),
-          value: "Communication",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Team Collaboration",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Training, Education & Staff Development",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Financial & Budget Management",
+          value: "Financial & Budget Oversight",
         },
         {
           id: crypto.randomUUID(),
@@ -353,33 +319,43 @@ const demoCV = {
         },
         {
           id: crypto.randomUUID(),
-          value: "Visual Communication & Graphic Design",
-        },
-        {
-          id: crypto.randomUUID(),
-          value: "Human Resources & Payroll Administration",
+          value: "Policy & Procedure Development",
         },
       ],
     },
     {
       id: crypto.randomUUID(),
-      skillCategory: "Web Development",
+      skillCategory: "Leadership & Management",
       skills: [
         {
           id: crypto.randomUUID(),
-          value: "HTML",
+          value: "Hiring & Staff Supervision",
         },
         {
           id: crypto.randomUUID(),
-          value: "CSS",
+          value: "HR Administration & Payroll",
         },
         {
           id: crypto.randomUUID(),
-          value: "JavaScript",
+          value: "Staff Training",
+        },
+      ],
+    },
+    {
+      id: crypto.randomUUID(),
+      skillCategory: "Technical & Systems",
+      skills: [
+        {
+          id: crypto.randomUUID(),
+          value: "Web Accessibility Testing (DHS Trusted Tester)",
         },
         {
           id: crypto.randomUUID(),
-          value: "React",
+          value: "Web Development (HTML, CSS, JavaScript, React)",
+        },
+        {
+          id: crypto.randomUUID(),
+          value: "Digital & Visual Communication",
         },
       ],
     },
@@ -389,11 +365,11 @@ const demoCV = {
       skills: [
         {
           id: crypto.randomUUID(),
-          value: "Native English",
+          value: "English (Native)",
         },
         {
           id: crypto.randomUUID(),
-          value: "Spanish Level B2",
+          value: "Spanish (B1 - B2)",
         },
       ],
     },

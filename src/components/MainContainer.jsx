@@ -166,24 +166,21 @@ function MainContainer({
                   className="arrowButton"
                   onClick={() => handleMoveWorkDownInArray(work.id)}
                 >
-                  UP
+                  &uArr;
                 </button>
                 <button
                   type="button"
                   className="arrowButton"
                   onClick={() => handleMoveWorkUpInArray(work.id)}
                 >
-                  DOWN
+                  &dArr;
                 </button>
               </div>
               <div className="workPlaceInfo">
                 <div className="workPlaceHeader">
                   <div className="buttonSide">
-                    <div>
+                    <div className="title-buttons">
                       <h3 className="workPlace">{work.positionTitle}</h3>
-                      <p>{work.workPlaceName}</p>
-                    </div>
-                    <div>
                       <button
                         className="editWorkPlace"
                         onClick={() => editWorkPlace(work.id)}
@@ -199,19 +196,26 @@ function MainContainer({
                         Delete
                       </button>
                     </div>
-                  </div>
-                  <div>
-                    <time className="year" dateTime="2022-01">
-                      {work.dates}
-                    </time>
-                    <address>
-                      {[work.city, work.state, work.country]
-                        .filter(Boolean)
-                        .join(", ")}
-                    </address>
+                    <div className="workPlace-location-date">
+                      {work.workPlaceName && (
+                        <p>{work.workPlaceName}&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+                      )}
+                      {[work.city, work.state, work.country].filter(Boolean)
+                        .length > 0 && (
+                        <address>
+                          {[work.city, work.state, work.country]
+                            .filter(Boolean)
+                            .join(", ")}
+                          &nbsp;&nbsp;|&nbsp;&nbsp;
+                        </address>
+                      )}
+                      <time className="year" dateTime="2022-01">
+                        {work.dates}
+                      </time>
+                    </div>
                   </div>
                 </div>
-                <ul>
+                <ul className="work-duties">
                   {work.duties.map((duty) => (
                     <li key={duty.id}>{duty.value}</li>
                   ))}
@@ -232,14 +236,14 @@ function MainContainer({
                   className="arrowButton"
                   onClick={() => handleMoveEduDownInArray(school.id)}
                 >
-                  UP
+                  &uArr;
                 </button>
                 <button
                   type="button"
                   className="arrowButton"
                   onClick={() => handleMoveEduUpInArray(school.id)}
                 >
-                  DOWN
+                  &dArr;
                 </button>
               </div>
 
@@ -260,12 +264,17 @@ function MainContainer({
                   Delete
                 </button>
                 <div className="resume-meta">
-                  <p className="label">{school.degreeName}</p>
-                  <p className="location">
-                    {[school.cityName, school.stateName, school.countryName]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </p>
+                  {school.degreeName && (
+                    <p>{school.degreeName}&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+                  )}
+                  {school.cityName && (
+                    <p className="location">
+                      {[school.cityName, school.stateName, school.countryName]
+                        .filter(Boolean)
+                        .join(", ")}
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </p>
+                  )}
                   <time className="year">{school.year}</time>
                 </div>
               </div>
@@ -289,14 +298,14 @@ function MainContainer({
                   className="arrowButton"
                   onClick={() => handleMoveSkillsDownInArray(skill.id)}
                 >
-                  UP
+                  &uArr;
                 </button>
                 <button
                   type="button"
                   className="arrowButton"
                   onClick={() => handleMoveSkillsUpInArray(skill.id)}
                 >
-                  DOWN
+                  &dArr;
                 </button>
               </div>
               <div className="skillsInfo">
@@ -316,8 +325,8 @@ function MainContainer({
                   Delete
                 </button>
                 <br />
-                <ul>
-                  {skill.skills.map((skill, index) => (
+                <ul className="skill-entries">
+                  {skill.skills.map((skill) => (
                     <li key={skill.id}>{skill.value}</li>
                   ))}
                 </ul>
