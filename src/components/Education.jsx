@@ -53,6 +53,7 @@ function Education({
         label="Degree "
         type="text"
         name="degreeName"
+        id="degreeName"
         value={draftEducationData.degreeName}
         onChange={handleChange}
       />
@@ -60,6 +61,7 @@ function Education({
         label="School Name "
         type="text"
         name="schoolName"
+        id="schoolName"
         value={draftEducationData.schoolName}
         onChange={handleChange}
       />

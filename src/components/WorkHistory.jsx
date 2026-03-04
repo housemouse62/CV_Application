@@ -133,6 +133,7 @@ function WorkHistory({
         label="Position Title "
         type="text"
         name="positionTitle"
+        id="positionTitle"
         value={draftWorkHistory.positionTitle}
         onChange={handleChange}
       />
@@ -140,6 +141,7 @@ function WorkHistory({
         label="Workplace Name "
         type="text"
         name="workPlaceName"
+        id="workPlaceName"
         value={draftWorkHistory.workPlaceName}
         onChange={handleChange}
       />
@@ -147,6 +149,7 @@ function WorkHistory({
         label="Dates Worked "
         type="text"
         name="dates"
+        id="dates"
         value={draftWorkHistory.dates}
         onChange={handleChange}
       />
@@ -154,6 +157,7 @@ function WorkHistory({
         label="City "
         type="text"
         name="city"
+        id="workCity"
         value={draftWorkHistory.city}
         onChange={handleChange}
       />
@@ -161,6 +165,7 @@ function WorkHistory({
         label="State "
         type="text"
         name="state"
+        id="workState"
         value={draftWorkHistory.state}
         onChange={handleChange}
       />
@@ -168,6 +173,7 @@ function WorkHistory({
         label="Country "
         type="text"
         name="country"
+        id="workCountry"
         value={draftWorkHistory.country}
         onChange={handleChange}
       />

@@ -19,8 +19,14 @@ label {
   font-weight: 600;
 }
 
-input:focus {
+input:focus-visible {
   border-color: #3b83f6;
   box-shadow: 0 3px 15px rgba(59, 131, 246, 0.2);
-  outline: none;
+  outline: 2px solid #3b83f6;
+  outline-offset: 1px;
+}
+
+button:focus-visible {
+  outline: 2px solid #3b83f6;
+  outline-offset: 2px;
 }

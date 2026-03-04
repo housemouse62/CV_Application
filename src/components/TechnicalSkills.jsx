@@ -49,6 +49,7 @@ function TechnicalSkills({
         label="Skill Category "
         type="text"
         name="skillCategory"
+        id="skillCategory"
         value={draftTechnicalSkills.skillCategory}
         onChange={handleChange}
       />
@@ -57,7 +58,7 @@ function TechnicalSkills({
         {draftTechnicalSkills.skills.map((skill, index) => (
           <div key={skill.id} className="skillLine">
             <input
-              label="Skill "
+              aria-label={`Skill ${index + 1}`}
               type="text"
               value={skill.value}
               className="skill"
@@ -74,6 +75,7 @@ function TechnicalSkills({
             <button
               type="button"
               className="deleteSkill"
+              aria-label={`Remove skill ${index + 1}`}
               onClick={() => {
                 const newSkills = draftTechnicalSkills.skills.filter(
                   (_, i) => i !== index,

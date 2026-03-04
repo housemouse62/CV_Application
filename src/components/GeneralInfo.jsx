@@ -61,14 +61,14 @@ function GeneralInfo({
         value={draftGeneralInfoData.userPhone}
         onChange={handleChange}
       />
-      <div>
-        <label htmlFor="links">Links</label>
-        {draftLinks.map((link) => (
+      <div role="group" aria-labelledby="links-label">
+        <label id="links-label">Links</label>
+        {draftLinks.map((link, index) => (
           <div key={link.id} className="linkBox">
             <input
               type="text"
-              id={`link-name-${link.id}`}
-              placeholder="LinkdIn"
+              aria-label={`Link name ${index + 1}`}
+              placeholder="LinkedIn"
               className="linkbox"
               value={link.linkName}
               onChange={(e) => {
@@ -80,9 +80,9 @@ function GeneralInfo({
               }}
             />
             <input
-              type="text"
-              id={`link-address-${link.id}`}
-              placeholder="www.linkdin.com..."
+              type="url"
+              aria-label={`Link URL ${index + 1}`}
+              placeholder="https://linkedin.com/in/..."
               value={link.linkAddress}
               onChange={(e) => {
                 setDraftLinks((prev) =>
@@ -97,6 +97,7 @@ function GeneralInfo({
             <button
               type="button"
               className="deleteLink"
+              aria-label={`Remove link ${link.linkName || index + 1}`}
               onClick={() => {
                 setDraftLinks((prev) => prev.filter((l) => l.id !== link.id));
               }}

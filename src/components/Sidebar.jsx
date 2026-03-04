@@ -164,7 +164,7 @@ function Sidebar({
               type="button"
               className="undoRedo"
               disabled={cvData.future.length === 0}
-              onClick={() => undo()}
+              onClick={() => redo()}
             >
               Redo
             </button>

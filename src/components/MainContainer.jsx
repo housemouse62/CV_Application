@@ -164,6 +164,7 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
+                  aria-label={`Move ${work.positionTitle || work.workPlaceName} up`}
                   onClick={() => handleMoveWorkDownInArray(work.id)}
                 >
                   &uArr;
@@ -171,6 +172,7 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
+                  aria-label={`Move ${work.positionTitle || work.workPlaceName} down`}
                   onClick={() => handleMoveWorkUpInArray(work.id)}
                 >
                   &dArr;
@@ -234,6 +236,7 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
+                  aria-label={`Move ${school.schoolName} up`}
                   onClick={() => handleMoveEduDownInArray(school.id)}
                 >
                   &uArr;
@@ -241,6 +244,7 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
+                  aria-label={`Move ${school.schoolName} down`}
                   onClick={() => handleMoveEduUpInArray(school.id)}
                 >
                   &dArr;
@@ -287,7 +291,7 @@ function MainContainer({
         className="resume-section"
       >
         {technicalSkills.length > 0 && (
-          <h2 id="technicalSkills-heading ">Technical Skills</h2>
+          <h2 id="technicalSkills-heading">Technical Skills</h2>
         )}
         <div className="entries">
           {technicalSkills.map((skill) => (
@@ -296,6 +300,7 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
+                  aria-label={`Move ${skill.skillCategory} up`}
                   onClick={() => handleMoveSkillsDownInArray(skill.id)}
                 >
                   &uArr;
@@ -303,6 +308,7 @@ function MainContainer({
                 <button
                   type="button"
                   className="arrowButton"
+                  aria-label={`Move ${skill.skillCategory} down`}
                   onClick={() => handleMoveSkillsUpInArray(skill.id)}
                 >
                   &dArr;
