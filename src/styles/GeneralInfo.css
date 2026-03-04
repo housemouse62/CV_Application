@@ -15,6 +15,10 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+.addLink {
+  margin-right: 8px;
+}
+
 .deleteLink {
   margin-left: 5px;
   border-radius: 15px;
